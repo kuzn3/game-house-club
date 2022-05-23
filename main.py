@@ -2,11 +2,16 @@ from flask import Flask, redirect, render_template, request, url_for, session, j
 from flask_security import UserMixin, Security
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
-from flask_cors import CORS
 from flask_session import Session
 from bp_admin import admin
-from funcs import * 
 import os
+
+def get_data_from_db(table):
+    dict = {}
+    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
+    for i in range(len(data)):
+        dict[data[i][0]] = data[i][1]
+    return dict
 
 app = Flask(__name__)
 app.register_blueprint(admin)
@@ -26,9 +31,7 @@ sess = Session(app)
 
 csrf = CSRFProtect(app)
 
-security = Security(app)
 
-cors = CORS(app)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -54,28 +57,23 @@ def login():
         session.pop("user_id", None)
         username = str(request.form["username"])
         password = str(request.form["password"])
-        user = [x for x in User.query.all() if x.username == username and x.password == password][0]
-        if user:
+        try:
+            user = [x for x in User.query.all() if x.username == username and x.password == password][0]
             session["user_id"] = user.id
             return redirect(url_for("admin"))
-
+        except:
+            return render_template("login.html")
     return render_template("login.html")
 
 @app.get("/admin")
 def admin():
     if "user_id" not in session:
         return redirect(url_for("login"))
-    csv_to_json("./static/csv/place.csv", "./static/json/place.json")
-    set = get_random_color_set()
-    return render_template("admin.html", set = set)
+    return render_template("admin.html")
 
 @app.get("/")
 def user():
-    set = get_random_color_set()
-    news = read_data_from_csv("./static/csv/data.csv", "v")
-    place = read_data_from_csv("./static/csv/place.csv", "kv")
-    return render_template("admin.html", place = place, \
-        news = news, set = set)
+    return render_template("admin.html")
 
 @app.post("/append_news")
 def append_news():
@@ -134,12 +132,6 @@ def place():
     db.session.commit()
     return "true"
 
-def get_data_from_db(table):
-    dict = {}
-    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
-    for i in range(len(data)):
-        dict[data[i][0]] = data[i][1]
-    return dict
 
 if __name__ == "__main__":
 	app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
