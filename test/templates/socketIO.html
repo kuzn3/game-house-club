@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        document.onreadystatechange = function() {
+            
+            socket = io();
+            socket.connect('http://localhost:5000');
+            var list = document.querySelector('ul');
+            var btn = document.querySelector('button');
+            var input = document.querySelector('input')
+            socket.on('connect', function() {
+                socket.send('User has connected!');
+            });
+            socket.on('message', function(msg) {
+                list.innerHTML += `<li>${msg}</li>`;
+                console.log("Received message");
+            })
+            btn.onclick = function() {
+                socket.send(input.value);
+                input.value = '';
+            }
+        }
+    </script>
+    <ul id="messages"></ul>
+    <input type="text" id="myMessage">
+    <button id="sendbutton">Send</button>
+</body>
+</html>
