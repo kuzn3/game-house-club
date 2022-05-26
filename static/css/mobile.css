@@ -1,0 +1,98 @@
+body {
+    background: black;
+    margin: 0;   
+}
+.grid-container_1 {
+    display: grid;
+}
+.gplace {
+    cursor: pointers;
+    font-family: "Bebas Neue";
+    letter-spacing: -0.5vmin;
+    font-size: 8vmin;
+    display: table; 
+}
+.gplace div {
+    display: table-cell; 
+    vertical-align: middle; 
+    text-align: center;
+}
+.grid-container_2 {
+    display: grid;
+    grid-template-columns: auto auto;
+
+} 
+#place_17 {
+    grid-column: span 2;
+}
+#place_18 {
+    grid-column: span 3;
+}
+#place_19 {
+    grid-column: span 3;
+}
+.grid-container_1 { grid-area: container_1; }
+.grid-container_2 { grid-area: container_2; }
+.place_18 { grid-area: place_18; }
+.place_19 { grid-area: place_19; }
+.place_17 { grid-area: place_17; }
+.wall {
+    display: none;
+}
+main {
+    position: absolute;
+    top: 100;
+    display: grid;
+    row-gap: 0%;
+    width: 100%;
+    height: calc(100% - 13.3vw);
+    grid-template-areas: 
+    "container_1 container_1 container_1 container_1 container_1 container_1 container_2 container_2"
+    "container_1 container_1 container_1 container_1 container_1 container_1 container_2 container_2"
+    "place_18 place_18 place_18 place_18 place_19 place_19 container_2 container_2";
+}
+.scroll {
+    font-family: "Gill Sans", sans-serif;
+    color: white;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1vw solid;
+}
+ul {
+    list-style-position: inside;
+    list-style-type: square;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    margin-block-start: 0;
+    margin: 0;
+}
+a {
+    font-family: "Gill Sans", sans-serif;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+.button {
+    width: 20%;
+}
+.menu {
+    border-top: 0.2vw solid black;
+    font-size: 4vw;
+    height: 5.5vw;
+    
+    justify-content: center;
+    display: flex;
+}
+.house {
+    text-align: center;
+    height: 8.5vw;
+}
+.legend {
+    font-family: "Bebas Neue";
+    position: relative;
+    font-size: 7.8vw;
+}

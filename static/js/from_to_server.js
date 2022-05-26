@@ -7,7 +7,6 @@ function get_data_from_server(url, cb) {
         if(xhr.readyState === 4) {
             if(xhr.status == 200 || xhr.status == 304) {
                 cb(xhr.responseText)
-                console.log(xhr.response)
             }
             else {cb(Error)}
         }   
@@ -22,7 +21,7 @@ function post_data_to_server(info, url, cb) {
     xhr.timeout = 200;
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {
-            if(xhr.status == 200) {cb(true); console.log(xhr.response)}
+            if(xhr.status == 200) {cb(true)}
             else {cb(Error)}
         }
     }

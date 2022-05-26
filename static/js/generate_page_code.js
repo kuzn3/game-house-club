@@ -21,18 +21,24 @@ function generate_page_code() {
     nav.append(scroll = document.createElement("div"))
     scroll.append(items_block = document.createElement("div"))
     scroll.append(text_block = document.createElement("div"))
-    
+    scroll.append(color_block = document.createElement("div"))
+
     items_block.append(ul = document.createElement("ul"))
     items_block.append(input = document.createElement("input"))
     items_block.append(button = document.createElement("span"))
 
-    nav.className = "nav"; logo.className = "logo";
+    nav.className = "nav"; logo.className = "logo"; color_block.className = "color_block";
     scroll.className = "scroll"; items_block.className = "items_block";
     text_block.className = "text_block"; house.className = "house";
     menu.className = "menu"; legend.className = "legend"; button.className = "btn";
+
+    color_block.style.height = scroll.scrollHeight - items_block.offsetHeight - text_block.offsetHeight
+    window.onresize = () => {
+        color_block.style.height = scroll.scrolltHeight - items_block.offsetHeight - text_block.offsetHeight
+        console.log(color_block.style.height, scroll.offsetHeight, items_block.offsetHeight, text_block.offsetHeight)
+    }
     
     text_block.style.display = "none"
-
     legend.textContent = "GAME HOUSE"
     input.type = "text"
     input.id = "input"
@@ -46,7 +52,10 @@ function generate_page_code() {
 
     main = document.createElement("main")
     body.append(main)
-
+    
+    if (body.clientWidth <= 824) {
+        scroll.style.display = "none"
+    }
     walls_id = ["wall_1", "wall_2", "wall_3", "wall_4"]
     walls_id.map(x => {
         main.append(el = document.createElement("div"))
@@ -81,11 +90,6 @@ function generate_page_code() {
     span_18.textContent = "PS"
     blok_18.onclick = change_color
     blok_18.id = "place_18"
-    blok_18.style.width = "17%"
-    blok_18.style.height = "34%"
-    blok_18.style.position = "absolute"
-    blok_18.style.top = "0"
-    blok_18.style.left = "62%"
     blok_18.className = "gplace"
 
     main.append(blok_19 = document.createElement("div"))
@@ -93,12 +97,6 @@ function generate_page_code() {
     span_19.textContent = "PS"
     blok_19.onclick = change_color
     blok_19.id = "place_19"
-    blok_19.style.width = "30%"
-    blok_19.style.height = "50%"
-    blok_19.style.position = "absolute"
-    blok_19.style.top = "0"
-    blok_19.style.left = "30%"
     blok_19.className = "gplace"
-
 }
 

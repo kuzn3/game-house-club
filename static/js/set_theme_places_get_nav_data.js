@@ -33,6 +33,9 @@ function set_theme_places_get_nav_data() {
         table, th, td {
             border: 0.2vw solid ${theme[random].wall};
         }
+        .color_block {
+            background:  ${theme[random].wall};
+        }
         `
     }
 

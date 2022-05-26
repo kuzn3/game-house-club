@@ -1,17 +1,19 @@
 function navigation() {
     buttons_group = document.getElementsByClassName("button")
-
     if(this.textContent == "новости") {
+        scroll_for_mobile_v("новости")
         text_block.style.display = "none"
         url_for_request = "news"
         akie_items_list(obj_news)
     }
     else if(this.textContent == "эвенты") {
+        scroll_for_mobile_v("эвенты")
         text_block.style.display = "none"
         url_for_request = "akie"
         akie_items_list(obj_akie)
     }
     else if(this.textContent == "пакеты") {
+        scroll_for_mobile_v("пакеты")
         clear_and_display_tb_ib()
         generate_thead("Зал PC STANDART")
         generate_table(2, 4, text["прайс"]["стандарт"]["время"])
@@ -23,11 +25,13 @@ function navigation() {
         generate_table(2, 3, text["прайс"]["сони"])
     }
     else if(this.textContent == "коннект") {
+        scroll_for_mobile_v("коннект")
         clear_and_display_tb_ib()
         text_block.textContent = text["контакты"]
     }
     else if(this.textContent == "железо") {
-       clear_and_display_tb_ib()
+        scroll_for_mobile_v("железо")
+        clear_and_display_tb_ib()
         generate_thead("Зал PC STANDART")
         generate_table(2, 6, text["пк"]["стандарт"])
         generate_thead("Зал PC VIP")
@@ -48,8 +52,28 @@ function navigation() {
         items_block.style.display = "none"
         text_block.textContent = ""
     }
+    function scroll_for_mobile_v(name) {
+        if (body.clientWidth <= 824) {
+            console.log(name, r)
+            scroll_dspl = scroll.style.display
+            if(r == name) {
+                if(scroll.style.display == "block") {
+                    scroll.style.display = "none"
+                }
+                else if(scroll.style.display == "none") {
+                    scroll.style.display = "block"
+                    console.log(scroll.style.display)
+                }
+            }
+            else if(scroll.style.display == "none") {
+                scroll.style.display = "block"
+                console.log(scroll.style.display)
+            }
+            r[0] = name
+        }
+    }
 }
-
+r = []
 //Create a new List Item when Clicking on append-button
 function append_item(item) {
     if(item.height == 1) {

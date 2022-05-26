@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for, session, jsonify
+from flask import Flask, redirect, render_template, request, url_for, session, jsonify, abort
 from flask_security import UserMixin, Security
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
@@ -27,7 +27,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 db = SQLAlchemy(app)
 
-sess = Session(app)
+#sess = Session(app)
 
 csrf = CSRFProtect(app)
 
@@ -62,7 +62,7 @@ def login():
             session["user_id"] = user.id
             return redirect(url_for("admin"))
         except:
-            return render_template("login.html")
+            return redirect(url_for("login"))
     return render_template("login.html")
 
 @app.get("/admin")
@@ -78,7 +78,7 @@ def user():
 @app.post("/append_news")
 def append_news():
     if "user_id" not in session:
-        return redirect(url_for("login"))
+        return abort(420)
     db.session.execute("INSERT INTO news (news) VALUES (\"" + request.form.get("value") + "\")")
     db.session.commit()
     data = db.session.execute("SELECT * FROM news").cursor.fetchall()
@@ -88,7 +88,7 @@ def append_news():
 @app.post("/delete_news")
 def delete_news():
     if "user_id" not in session:
-        return redirect(url_for("login"))
+        return abort(420)
     db.session.execute("DELETE FROM news WHERE news = \"" + request.form.get("value") + "\"")
     db.session.commit()
     return "True"
@@ -96,7 +96,7 @@ def delete_news():
 @app.post("/append_akie")
 def append_akie():
     if "user_id" not in session:
-        return redirect(url_for("login"))
+        return abort(420)
     db.session.execute("INSERT INTO akie (news) VALUES (\"" + request.form.get("value") + "\")")
     db.session.commit()
     data = db.session.execute("SELECT * FROM akie").cursor.fetchall()
@@ -106,7 +106,7 @@ def append_akie():
 @app.post("/delete_akie")
 def delete_akie():
     if "user_id" not in session:
-        return redirect(url_for("login"))
+        return abort(420)
     db.session.execute("DELETE FROM akie WHERE news = \"" + request.form.get("value") + "\"")
     db.session.commit()
     return "True"
@@ -128,9 +128,11 @@ def get_data_places():
 
 @app.post("/place")
 def place():
+    if "user_id" not in session:
+        return abort(420)
     db.session.execute("UPDATE place SET state = \"" + request.form.get("value") + "\" WHERE id = \"" + request.form.get("key") + "\"")
     db.session.commit()
-    return "true"
+    return "True"
 
 
 if __name__ == "__main__":
