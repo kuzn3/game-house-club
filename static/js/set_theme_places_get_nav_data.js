@@ -45,13 +45,15 @@ function set_theme_places_get_nav_data() {
             append_item(item)
         })
     })
-
     get_data_from_server("/get_data_akie", function(responseText) {
         obj_akie = JSON.parse(responseText)
     })
+    get_data_from_server("/get_data_connect", function(responseText) {
+        obj_connect = JSON.parse(responseText)
+    })
 
     function get_places() {
-        get_data_from_server("/get_data_places", function(responseText) {
+        get_data_from_server("/get_data_place", function(responseText) {
             lists_text = JSON.parse(responseText)
             places = Object.entries(lists_text)
             place_bloks = document.getElementsByClassName("gplace")
@@ -66,7 +68,6 @@ function set_theme_places_get_nav_data() {
     get_data_from_server("/static/json/data.json", function(responseText) {
         text = JSON.parse(responseText)
     })
-
 }
 
 generate_page_code()

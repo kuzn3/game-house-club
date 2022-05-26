@@ -19,7 +19,7 @@ app.register_blueprint(admin)
 app.config["SECRET_KEY"] = "text"
 app.config["SECURITY_PASSWORD_SALT"] = "text"
 app.config["WTF_CSRF_SECRET_KEY"] = "text"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///static/db/db.login"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///static/db/db.app"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SESSION_FILE_DIR"] = "/Users/dmitrijkuznecov/Documents/Programms/site/session"
 app.config["SESSION_COOKIE_SECURE"] = True
@@ -40,19 +40,26 @@ class User(UserMixin, db.Model):
 
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    news = db.Column(db.String(512), unique=False)
+    item = db.Column(db.String(512), unique=False)
 
 class Akie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    news = db.Column(db.String(512), unique=False)
+    item = db.Column(db.String(512), unique=False)
+
+class Connect(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    item = db.Column(db.String(512), unique=False)
 
 class Place(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     state = db.Column(db.String(5), unique=False)
 
 
+
 @app.route("/login", methods = ["GET", "POST"])
 def login():
+    if "user_id" in session:
+        return redirect(url_for("admin"))
     if request.method == "POST":
         session.pop("user_id", None)
         username = str(request.form["username"])
@@ -73,58 +80,43 @@ def admin():
 
 @app.get("/")
 def user():
-    return render_template("admin.html")
+    return render_template("user.html")
 
-@app.post("/append_news")
-def append_news():
+@app.post("/append_<table>")
+def append(table):
     if "user_id" not in session:
         return abort(420)
-    db.session.execute("INSERT INTO news (news) VALUES (\"" + request.form.get("value") + "\")")
+    db.session.execute("INSERT INTO " + table + " (item) VALUES (\"" + request.form.get("value") + "\")")
     db.session.commit()
-    data = db.session.execute("SELECT * FROM news").cursor.fetchall()
+    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
     print(data)
     return "True"
 
-@app.post("/delete_news")
-def delete_news():
+@app.post("/delete_<table>")
+def delete(table):
     if "user_id" not in session:
         return abort(420)
-    db.session.execute("DELETE FROM news WHERE news = \"" + request.form.get("value") + "\"")
+    db.session.execute("DELETE FROM " + table + " WHERE item = \"" + request.form.get("value") + "\"")
     db.session.commit()
+    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
+    print(data, request.form.get("value"))
     return "True"
 
-@app.post("/append_akie")
-def append_akie():
+@app.post("/update_<table>")
+def update(table):
     if "user_id" not in session:
         return abort(420)
-    db.session.execute("INSERT INTO akie (news) VALUES (\"" + request.form.get("value") + "\")")
+    query_string = "UPDATE " + table + " SET item = \"" + request.form.get("value") + "\" WHERE id = \"" + request.form.get("key").replace("item_", "") + "\""
+    db.session.execute(query_string)
     db.session.commit()
-    data = db.session.execute("SELECT * FROM akie").cursor.fetchall()
+    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
     print(data)
     return "True"
 
-@app.post("/delete_akie")
-def delete_akie():
-    if "user_id" not in session:
-        return abort(420)
-    db.session.execute("DELETE FROM akie WHERE news = \"" + request.form.get("value") + "\"")
-    db.session.commit()
-    return "True"
-
-@app.get("/get_data_akie")
-def get_data_akie():
-    dict_akie = get_data_from_db("akie")
-    return jsonify(dict_akie)
-
-@app.get("/get_data_news")
-def get_data_news():
-    dict_news = get_data_from_db("news")
-    return jsonify(dict_news)
-
-@app.get("/get_data_places")
-def get_data_places():
-    dict_places = get_data_from_db("place")
-    return jsonify(dict_places)
+@app.get("/get_data_<table>")
+def get_data(table):
+    dict = get_data_from_db(str(table))
+    return jsonify(dict)
 
 @app.post("/place")
 def place():

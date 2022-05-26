@@ -25,10 +25,13 @@ function append_text_in_table(rows, columns, info, tbl_body) {
         var row = document.createElement("tr")
         for(var j = 0; j < columns; j++) {
             var cell = document.createElement("td")
-            console.log(info[i][j])
             var cellText = document.createTextNode(info[i][j])
             cell.appendChild(cellText)
             row.appendChild(cell)
+            //row.contentEditable = "true"
+            //row.oninput = () => {console.log(//EventClick Mozilla & Safari
+            //onerror UPDATE LIST ?
+            //.....html + js for User ~
         }
         tbl_body.appendChild(row)
     }

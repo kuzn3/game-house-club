@@ -15,7 +15,7 @@ function generate_page_code() {
         menu.append(el = document.createElement("a"))
         el.className = "button"           
         el.textContent = x
-        el.onclick = navigation
+        el.onclick = navigation_bar
     })
 
     nav.append(scroll = document.createElement("div"))
@@ -24,38 +24,28 @@ function generate_page_code() {
     scroll.append(color_block = document.createElement("div"))
 
     items_block.append(ul = document.createElement("ul"))
-    items_block.append(input = document.createElement("input"))
-    items_block.append(button = document.createElement("span"))
 
     nav.className = "nav"; logo.className = "logo"; color_block.className = "color_block";
     scroll.className = "scroll"; items_block.className = "items_block";
     text_block.className = "text_block"; house.className = "house";
-    menu.className = "menu"; legend.className = "legend"; button.className = "btn";
+    menu.className = "menu"; legend.className = "legend";
 
-    color_block.style.height = scroll.scrollHeight - items_block.offsetHeight - text_block.offsetHeight
-    window.onresize = () => {
-        color_block.style.height = scroll.scrolltHeight - items_block.offsetHeight - text_block.offsetHeight
-        console.log(color_block.style.height, scroll.offsetHeight, items_block.offsetHeight, text_block.offsetHeight)
+    if (screen.availWidth < screen.availHeight) {
+        scroll.style.display = "none"
+    }
+    else {
+        color_block.style.height = scroll.scrollHeight - items_block.offsetHeight - text_block.offsetHeight
+        window.onresize = () => {
+            color_block.style.height = scroll.scrolltHeight - items_block.offsetHeight - text_block.offsetHeight
+        }
     }
     
     text_block.style.display = "none"
     legend.textContent = "GAME HOUSE"
-    input.type = "text"
-    input.id = "input"
-    input.placeholder = ""
-
-    url_for_request = "news"
-    
-    button.textContent = "\u2713"
-    button.style.background = "white"
-    button.onclick = append_item
 
     main = document.createElement("main")
     body.append(main)
     
-    if (body.clientWidth <= 824) {
-        scroll.style.display = "none"
-    }
     walls_id = ["wall_1", "wall_2", "wall_3", "wall_4"]
     walls_id.map(x => {
         main.append(el = document.createElement("div"))
@@ -70,7 +60,6 @@ function generate_page_code() {
         el.append(span = document.createElement("div"))
         span.textContent = i
         el.id = "place_" + i
-        el.onclick = change_color
         el.className = "gplace"
     }
 
@@ -81,21 +70,18 @@ function generate_page_code() {
         el.append(span = document.createElement("div"))
         span.textContent = i
         el.id = "place_" + i
-        el.onclick = change_color
         el.className = "gplace"
     }
 
     main.append(blok_18 = document.createElement("div"))
     blok_18.append(span_18 = document.createElement("div"))
     span_18.textContent = "PS"
-    blok_18.onclick = change_color
     blok_18.id = "place_18"
     blok_18.className = "gplace"
 
     main.append(blok_19 = document.createElement("div"))
     blok_19.append(span_19 = document.createElement("div"))
     span_19.textContent = "PS"
-    blok_19.onclick = change_color
     blok_19.id = "place_19"
     blok_19.className = "gplace"
 }

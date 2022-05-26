@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <title>GH Login</title>
 </head>
 <body>
-    <form method="POST">
-        Username: <input type="username" name="username">
-        Password: <input type="password" name="password">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <input type="submit">
-    </form>
+    <div>
+        <form method="POST">
+            username <input type="username" name="username">
+            password <input type="password" name="password">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="submit" value="ENTER">
+        </form>
+    </div>
 </body>
 </html>

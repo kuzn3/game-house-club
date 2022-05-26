@@ -1,0 +1,31 @@
+body {
+    font-family: "Gill Sans", sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+input[type=password], input[type=username] {
+    width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type=submit] {
+    margin-top: 3%;
+    background-color: goldenrod;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    background-color: rgb(202, 151, 20);
+}
+div {
+    position: relative;
+    top: 40%;
+    left: 46.25%;
+    text-align: center;
+    height: 12.6%;
+    width: 7.5%;
+    border-radius: 5px;
+    background-color: gray;
+}
