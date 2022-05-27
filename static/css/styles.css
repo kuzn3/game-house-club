@@ -1,5 +1,4 @@
 body {
-    
     margin: 0;
     width: 100vw;
     height: 100vh;
@@ -18,7 +17,7 @@ body {
     overflow: scroll;
     width: 100%;
     white-space: pre-wrap;
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'Oswald', sans-serif;
     font-size: 1.3vw;
     color: white;
     hyphens: auto;
@@ -65,9 +64,10 @@ ul {
     margin: 0
 }
 a {
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-align: center;
     position: relative;
+    bottom: 15%;
     cursor: pointer;
 }
 .wall {
@@ -81,6 +81,8 @@ a {
     height: 46%;
     bottom: 0;
     right: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3vw;
 }
 #wall_3 {
     height: 34%;

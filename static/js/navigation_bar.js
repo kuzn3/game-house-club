@@ -24,7 +24,7 @@ function navigation_bar() {
         generate_table(2, 4, text["прайс"]["вип"]["время"])
         generate_table(2, 4, text["прайс"]["вип"]["пакеты"])
         generate_thead("PLAYSTATION 5 VIP")
-        generate_table(2, 3, text["прайс"]["сони-вп"])
+        generate_table(2, 3, text["прайс"]["сони-вп"], "прайс сони-вп")
     }
     else if(this.textContent == "коннект") {
         scroll_for_mobile_v("коннект")

@@ -1,14 +1,16 @@
+from __future__ import unicode_literals
 from flask import Flask, redirect, render_template, request, url_for, session, jsonify, abort
 from flask_security import UserMixin, Security
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
 from bp_admin import admin
+import json
 import os
 
 def get_data_from_db(table):
     dict = {}
-    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
+    data = db.session.execute("SELECT * FROM {}".format(table)).cursor.fetchall()
     for i in range(len(data)):
         dict[data[i][0]] = data[i][1]
     return dict
@@ -30,8 +32,6 @@ db = SQLAlchemy(app)
 #sess = Session(app)
 
 csrf = CSRFProtect(app)
-
-
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -86,31 +86,24 @@ def user():
 def append(table):
     if "user_id" not in session:
         return abort(420)
-    db.session.execute("INSERT INTO " + table + " (item) VALUES (\"" + request.form.get("value") + "\")")
+    db.session.execute("INSERT INTO {} (item) VALUES (\"{}\")".format(table, request.form.get("value")))
     db.session.commit()
-    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
-    print(data)
     return "True"
 
 @app.post("/delete_<table>")
 def delete(table):
     if "user_id" not in session:
         return abort(420)
-    db.session.execute("DELETE FROM " + table + " WHERE item = \"" + request.form.get("value") + "\"")
+    db.session.execute("DELETE FROM {} WHERE item = \"{}\"".format(table, request.form.get("value")))
     db.session.commit()
-    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
-    print(data, request.form.get("value"))
     return "True"
 
 @app.post("/update_<table>")
 def update(table):
     if "user_id" not in session:
         return abort(420)
-    query_string = "UPDATE " + table + " SET item = \"" + request.form.get("value") + "\" WHERE id = \"" + request.form.get("key").replace("item_", "") + "\""
-    db.session.execute(query_string)
+    db.session.execute("UPDATE {} SET item = \"{}\" WHERE id = \"{}\"".format(table, request.form.get("value"), request.form.get("key").replace("item_", "")))
     db.session.commit()
-    data = db.session.execute("SELECT * FROM " + table).cursor.fetchall()
-    print(data)
     return "True"
 
 @app.get("/get_data_<table>")
@@ -122,7 +115,7 @@ def get_data(table):
 def place():
     if "user_id" not in session:
         return abort(420)
-    db.session.execute("UPDATE place SET state = \"" + request.form.get("value") + "\" WHERE id = \"" + request.form.get("key") + "\"")
+    db.session.execute("UPDATE place SET state = \"{}\" WHERE id = \"{}\"".format(request.form.get("value"), request.form.get("key")))
     db.session.commit()
     return "True"
 

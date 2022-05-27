@@ -54,7 +54,7 @@ main {
     "place_18 place_18 place_18 place_18 place_19 place_19 container_2 container_2";
 }
 .scroll {
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'Oswald', sans-serif;
     color: white;
 }
 table {
@@ -62,7 +62,7 @@ table {
     border-collapse: collapse;
 }
 table, th, td {
-    border: 1vw solid;
+    border: 2vw solid;
 }
 ul {
     list-style-position: inside;
@@ -73,8 +73,9 @@ ul {
     margin: 0;
 }
 a {
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-align: center;
+    bottom: 15%;
     position: relative;
     cursor: pointer;
 }

@@ -32,16 +32,6 @@ function generate_page_code() {
     text_block.className = "text_block"; house.className = "house";
     menu.className = "menu"; legend.className = "legend"; button.className = "btn";
 
-    if (screen.availWidth < screen.availHeight) {
-        scroll.style.display = "none"
-    }
-    else {
-        color_block.style.height = scroll.scrollHeight - items_block.offsetHeight - text_block.offsetHeight
-        window.onresize = () => {
-            color_block.style.height = scroll.scrolltHeight - items_block.offsetHeight - text_block.offsetHeight
-        }
-    }
-    
     text_block.style.display = "none"
     legend.textContent = "GAME HOUSE"
     input.type = "text"

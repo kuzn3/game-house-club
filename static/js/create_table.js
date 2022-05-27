@@ -12,7 +12,6 @@ function generate_table(rows, columns, info) {
     var tbl_body = document.createElement("tbody")
 
     data = [Object.keys(info),Object.values(info)]
-
     append_text_in_table(rows, columns, data, tbl_body)
     
     tbl.appendChild(tbl_body)
@@ -21,6 +20,7 @@ function generate_table(rows, columns, info) {
 }
 
 function append_text_in_table(rows, columns, info, tbl_body) {
+    console.log(info)
     for(var i = 0; i < rows; i++) {
         var row = document.createElement("tr")
         for(var j = 0; j < columns; j++) {
@@ -35,4 +35,13 @@ function append_text_in_table(rows, columns, info, tbl_body) {
         }
         tbl_body.appendChild(row)
     }
+}
+
+function cell_update() {
+    info = [this.id, [this.textContent, this.parentElement.parentElement.parentElement.className]] 
+        post_data_to_server(info, "/update_table", function(response_state) {
+            if(response_state == Error) {
+                console.error("error")
+            }
+        })
 }

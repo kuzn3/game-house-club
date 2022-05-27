@@ -4,7 +4,7 @@ function set_theme_places_get_nav_data() {
         timeout_f1 = window.setTimeout(get_places, 0)
         timeout_f2 = window.setTimeout(set_borders, 0)
         theme = JSON.parse(responseText)
-        random = Math.floor(Math.random() * 3)
+        random = Math.floor(Math.random() * 2)
     
         let walls = document.getElementsByClassName("wall")
         Array.from(walls, x => {
@@ -44,6 +44,7 @@ function set_theme_places_get_nav_data() {
         Array.from(Object.values(obj_news), item => {
             append_item(item)
         })
+        height_of_color_block_and_scroll_dspl()
     })
     get_data_from_server("/get_data_akie", function(responseText) {
         obj_akie = JSON.parse(responseText)
@@ -70,5 +71,21 @@ function set_theme_places_get_nav_data() {
     })
 }
 
+function height_of_color_block_and_scroll_dspl() {
+    if (screen.availWidth < screen.availHeight) {
+        scroll.style.display = "none"
+    }
+    else {
+        color_block.style.height = "0px"
+        window.onresize = () => {
+            h = scroll.offsetHeight - items_block.offsetHeight
+            if(h <= 0) {color_block.style.height = "0px"}
+            else {color_block.style.height = String(h) + "px"}
+        }
+     }
+}
+
+
 generate_page_code()
 set_theme_places_get_nav_data()
+
