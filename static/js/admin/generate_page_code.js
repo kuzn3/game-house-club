@@ -89,5 +89,6 @@ function generate_page_code() {
     blok_19.onclick = change_color
     blok_19.id = "place_19"
     blok_19.className = "gplace"
+
 }
 

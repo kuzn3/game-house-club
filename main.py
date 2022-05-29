@@ -119,6 +119,13 @@ def place():
     db.session.commit()
     return "True"
 
+@app.get("/logout")
+def logout():
+    if "user_id" in session:
+        session.pop("user_id")
+    else:
+        redirect(url_for(".user"))
+    return redirect(url_for(".user"))
 
 if __name__ == "__main__":
 	app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

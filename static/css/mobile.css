@@ -1,7 +1,6 @@
 body {
     background: black;
     margin: 0;
-    
 }
 .grid-container_1 {
     display: grid;
@@ -14,6 +13,7 @@ body {
     letter-spacing: -0.5vmin;
     font-size: 8vmin;
     display: table; 
+    border: 0.5vh solid black;
 }
 .gplace div {
     display: table-cell; 
@@ -29,10 +29,10 @@ body {
     grid-column: span 2;
 }
 #place_18 {
-    grid-column: span 3;
+    grid-column: span 4;
 }
 #place_19 {
-    grid-column: span 3;
+    grid-column: span 4;
 }
 .grid-container_1 { grid-area: container_1; }
 .grid-container_2 { grid-area: container_2; }
@@ -51,18 +51,23 @@ main {
     grid-template-areas: 
     "container_1 container_1 container_1 container_1 container_1 container_1 container_2 container_2"
     "container_1 container_1 container_1 container_1 container_1 container_1 container_2 container_2"
-    "place_18 place_18 place_18 place_18 place_19 place_19 container_2 container_2";
+    "container_1 container_1 container_1 container_1 container_1 container_1 container_2 container_2"
+    "place_18 place_18 place_18 place_18 place_19 place_19 place_19 place_19";
+
 }
 .scroll {
     font-family: 'Oswald', sans-serif;
+    font-size: 2.5vh;
     color: white;
+    width: 100%;
+    border: 0.3vh solid black;
 }
 table {
     width: 100%;
     border-collapse: collapse;
 }
 table, th, td {
-    border: 2vw solid;
+    border: 2vh solid;
 }
 ul {
     list-style-position: inside;
@@ -83,16 +88,18 @@ a {
     width: 20%;
 }
 .menu {
-    border-top: 0.2vw solid black;
     font-size: 4vw;
     height: 5.5vw;
-    
+    width: 100%;
+    border: 0.3vh solid black;
     justify-content: center;
     display: flex;
 }
 .house {
+    border: 0.3vh solid black;
     text-align: center;
     height: 8.5vw;
+    width: 100%;
 }
 .legend {
     top: 0.05vw;
