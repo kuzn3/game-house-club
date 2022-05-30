@@ -29,7 +29,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 db = SQLAlchemy(app)
 
-sess = Session(app)
+#sess = Session(app)
 
 csrf = CSRFProtect(app)
 
