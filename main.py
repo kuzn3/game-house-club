@@ -29,7 +29,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 db = SQLAlchemy(app)
 
-#sess = Session(app)
+sess = Session(app)
 
 csrf = CSRFProtect(app)
 
@@ -73,6 +73,7 @@ def login():
     return render_template("login.html")
 
 @app.get("/admin")
+@csrf.exempt
 def admin():
     if "user_id" not in session:
         return redirect(url_for("login"))
