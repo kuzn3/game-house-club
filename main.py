@@ -7,7 +7,8 @@ from hashlib import sha256
 import os, random
 
 
-token = sha256(str(random.randint(0,1024)).encode("UTF-8")).hexdigest()
+JWT_tokens = []
+
 
 def get_data_from_db(table):
     dict = {}
@@ -18,12 +19,12 @@ def get_data_from_db(table):
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = str(random.randint(0,1024))
-app.config["SECURITY_PASSWORD_SALT"] = str(random.randint(0,1024))
-app.config["WTF_CSRF_SECRET_KEY"] = str(random.randint(0,1024))
+app.config["SECRET_KEY"] = "text"
+app.config["SECURITY_PASSWORD_SALT"] = "text"
+app.config["WTF_CSRF_SECRET_KEY"] = "text"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///static/db/db.app"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SESSION_FILE_DIR"] = "/Users/dmitrijkuznecov/Documents/Programms/site/session"
+app.config["SESSION_FILE_DIR"] = "./session"
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 
@@ -67,17 +68,18 @@ def login():
         try:
             user = [x for x in User.query.all() if x.username == username and x.password == password][0]
             session["user_id"] = user.id
+            JWT_token = sha256(str(username + "_" + password).encode("UTF-8")).hexdigest()
+            JWT_tokens.append(JWT_token)
             return redirect(url_for("admin"))
         except:
             return redirect(url_for("login"))
     return render_template("login.html")
 
 @app.get("/admin")
-@csrf.exempt
 def admin():
     if "user_id" not in session:
         return redirect(url_for("login"))
-    return render_template("admin.html", token = token)
+    return render_template("admin.html")
 
 @app.get("/")
 def user():
@@ -87,43 +89,41 @@ def user():
 @csrf.exempt
 def append(table):
     JWT = request.headers.get("JWT")
-    if "user_id" not in session or JWT != token:
+    print(JWT, JWT_tokens)
+    if "user_id" not in session or JWT not in JWT_tokens:
         return abort(420)
     db.session.execute("INSERT INTO {} (item) VALUES (\"{}\")".format(table, request.form.get("value")))
     db.session.commit()
     return "True"
 
 @app.post("/delete_<table>")
-@csrf.exempt
 def delete(table):
     JWT = request.headers.get("JWT")
-    if "user_id" not in session or JWT != token:
+    print(JWT, JWT_tokens)
+    if "user_id" not in session or JWT not in JWT_tokens:
         return abort(420)
     db.session.execute("DELETE FROM {} WHERE item = \"{}\"".format(table, request.form.get("value")))
     db.session.commit()
     return "True"
 
 @app.post("/update_<table>")
-@csrf.exempt
 def update(table):
     JWT = request.headers.get("JWT")
-    if "user_id" not in session or JWT != token:
+    if "user_id" not in session or JWT not in JWT_tokens:
         return abort(420)
     db.session.execute("UPDATE {} SET item = \"{}\" WHERE id = \"{}\"".format(table, request.form.get("value"), request.form.get("key").replace("item_", "")))
     db.session.commit()
     return "True"
 
 @app.get("/get_data_<table>")
-@csrf.exempt
 def get_data(table):
     dict = get_data_from_db(str(table))
     return jsonify(dict)
 
 @app.post("/place")
-@csrf.exempt
 def place():
     JWT = request.headers.get("JWT")
-    if "user_id" not in session or JWT != token:
+    if "user_id" not in session or JWT not in JWT_tokens:
         return abort(420)
     db.session.execute("UPDATE place SET state = \"{}\" WHERE id = \"{}\"".format(request.form.get("value"), request.form.get("key")))
     db.session.commit()

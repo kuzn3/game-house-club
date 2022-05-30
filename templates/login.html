@@ -21,10 +21,31 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         </div>
         <div class="form-field">
-            <button class="btn" type="submit">Log in</button>
+            <button class="btn" type="submit" onclick="sha256(document.forms[0][0].value, document.forms[0][1].value)">Log in</button>
         </div>
     </form>
 </body>
+
+<script>
+    async function sha256(username, password) {
+  // create message
+  const message = username + "_" + password;
+  // encode as UTF-8
+  const msgBuffer = new TextEncoder('utf-8').encode(message);
+
+  // hash the message
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+  // convert ArrayBuffer to Array
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+  // convert bytes to hex string
+  const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+  
+  sessionStorage.setItem("JWT", hashHex);
+  return hashHex;
+}
+</script>
 </html>
 
 
