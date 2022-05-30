@@ -23,13 +23,13 @@ app.config["SECURITY_PASSWORD_SALT"] = "text"
 app.config["WTF_CSRF_SECRET_KEY"] = "text"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///static/db/db.app"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SESSION_FILE_DIR"] = "/Users/dmitrijkuznecov/Documents/Programms/site/session"
+app.config["SESSION_FILE_DIR"] = "./session"
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 
 db = SQLAlchemy(app)
 
-#sess = Session(app)
+sess = Session(app)
 
 csrf = CSRFProtect(app)
 
