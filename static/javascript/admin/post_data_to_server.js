@@ -3,6 +3,7 @@ function post_data_to_server(info, url, cb) {
     xhr.open("POST", url, true);
     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
     xhr.setRequestHeader('JWT', sessionStorage.getItem("token"))
+    xhr.setRequestHeader('X-CSRF-Token', sessionStorage.getItem("csrf-token"))
     xhr.timeout = 200;
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {
