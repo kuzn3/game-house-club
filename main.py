@@ -18,9 +18,9 @@ def get_data_from_db(table):
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "text"
-app.config["SECURITY_PASSWORD_SALT"] = "text"
-app.config["WTF_CSRF_SECRET_KEY"] = "text"
+app.config["SECRET_KEY"] = str(random.randint(0,1024))
+app.config["SECURITY_PASSWORD_SALT"] = str(random.randint(0,1024))
+app.config["WTF_CSRF_SECRET_KEY"] = str(random.randint(0,1024))
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///static/db/db.app"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SESSION_FILE_DIR"] = "./session"
