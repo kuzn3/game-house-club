@@ -15,7 +15,7 @@
     <body>
         <script> 
             sessionStorage.setItem("token", "{{ token }}")
-            sessionStorage.setItem("csrf-token", "{{ csrf_token() }}")
+            csrf_token = "{{ csrf_token() }}"
         </script>
         <script src="/static/javascript/admin/update_delete_item.js"></script>
         <script src="/static/javascript/admin/append_item.js"></script>

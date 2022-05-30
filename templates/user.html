@@ -16,7 +16,7 @@
     <body>
         <script> 
             sessionStorage.setItem("token", "{{ token }}")
-            sessionStorage.setItem("csrf-token", "{{ csrf_token() }}")
+            csrf_token = "{{ csrf_token() }}"
         </script>
         <script src="/static/javascript/create_table.js"></script>
         <script src="/static/javascript/user/append_item.js"></script>
