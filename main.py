@@ -1,12 +1,13 @@
-from __future__ import unicode_literals
 from flask import Flask, redirect, render_template, request, url_for, session, jsonify, abort
-from flask_security import UserMixin, Security
+from flask_security import  UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
-from bp_admin import admin
-import json
-import os
+from hashlib import sha256
+import os, random
+
+
+token = sha256(str(random.randint(0,1024)).encode("UTF-8")).hexdigest()
 
 def get_data_from_db(table):
     dict = {}
@@ -16,7 +17,6 @@ def get_data_from_db(table):
     return dict
 
 app = Flask(__name__)
-app.register_blueprint(admin)
 
 app.config["SECRET_KEY"] = "text"
 app.config["SECURITY_PASSWORD_SALT"] = "text"
@@ -76,44 +76,53 @@ def login():
 def admin():
     if "user_id" not in session:
         return redirect(url_for("login"))
-    return render_template("admin.html")
+    return render_template("admin.html", token = token)
 
 @app.get("/")
 def user():
     return render_template("user.html")
 
 @app.post("/append_<table>")
+@csrf.exempt
 def append(table):
-    if "user_id" not in session:
+    JWT = request.headers.get("JWT")
+    if "user_id" not in session or JWT != token:
         return abort(420)
     db.session.execute("INSERT INTO {} (item) VALUES (\"{}\")".format(table, request.form.get("value")))
     db.session.commit()
     return "True"
 
 @app.post("/delete_<table>")
+@csrf.exempt
 def delete(table):
-    if "user_id" not in session:
+    JWT = request.headers.get("JWT")
+    if "user_id" not in session or JWT != token:
         return abort(420)
     db.session.execute("DELETE FROM {} WHERE item = \"{}\"".format(table, request.form.get("value")))
     db.session.commit()
     return "True"
 
 @app.post("/update_<table>")
+@csrf.exempt
 def update(table):
-    if "user_id" not in session:
+    JWT = request.headers.get("JWT")
+    if "user_id" not in session or JWT != token:
         return abort(420)
     db.session.execute("UPDATE {} SET item = \"{}\" WHERE id = \"{}\"".format(table, request.form.get("value"), request.form.get("key").replace("item_", "")))
     db.session.commit()
     return "True"
 
 @app.get("/get_data_<table>")
+@csrf.exempt
 def get_data(table):
     dict = get_data_from_db(str(table))
     return jsonify(dict)
 
 @app.post("/place")
+@csrf.exempt
 def place():
-    if "user_id" not in session:
+    JWT = request.headers.get("JWT")
+    if "user_id" not in session or JWT != token:
         return abort(420)
     db.session.execute("UPDATE place SET state = \"{}\" WHERE id = \"{}\"".format(request.form.get("value"), request.form.get("key")))
     db.session.commit()

@@ -13,7 +13,10 @@
         <title>GH Club</title>
     </head>
     <body>
-        <script> csrf = "{{ csrf_token() }}"</script>
+        <script> 
+            token = "{{ token }}" 
+            sessionStorage.setItem("token", token)
+        </script>
         <script src="/static/js/admin/update_delete_item.js"></script>
         <script src="/static/js/admin/append_item.js"></script>
         <script src="/static/js/navigation_bar.js"></script>
