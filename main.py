@@ -23,7 +23,7 @@ app.config["SECURITY_PASSWORD_SALT"] = str(random.randint(0,1024))
 app.config["WTF_CSRF_SECRET_KEY"] = str(random.randint(0,1024))
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///static/db/db.app"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SESSION_FILE_DIR"] = "./session"
+app.config["SESSION_FILE_DIR"] = "/Users/dmitrijkuznecov/Documents/Programms/site/session"
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 
