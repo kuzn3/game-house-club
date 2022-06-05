@@ -10,19 +10,20 @@
         <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
         <link rel="stylesheet" media="screen and (min-device-width: 1024px)" href="/static/css/styles.css">
         <link rel="stylesheet" media="screen and (max-device-width: 824px)" href="/static/css/mobile.css">
-
         <title>GH Club</title>
     </head>
     <body>
         <script> 
-            sessionStorage.setItem("token", "{{ token }}");
-            csrf_token = "{{ csrf_token() }}";
+           
         </script>
+        <script src="/static/javascript/get_data_from_server.js"></script>
+        <script src="/static/javascript/requests_to_server.js"></script>
         <script src="/static/javascript/create_table.js"></script>
         <script src="/static/javascript/user/append_item.js"></script>
         <script src="/static/javascript/navigation_bar.js"></script>
-        <script src="/static/javascript/get_data_from_server.js"></script>
+        <script src="/static/javascript/post_data_to_server.js"></script>
         <script src="/static/javascript/user/generate_page_code.js"></script>
-        <script src="/static/javascript/set_theme_places_get_nav_data.js"></script>
+        <script src="/static/javascript/set_places_todo_walls.js"></script>
+        <script src="/static/javascript/login.js"></script>
     </body>
 </html>

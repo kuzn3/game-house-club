@@ -1,8 +1,8 @@
-function get_data_from_server(url, cb) {
+function getDataFromServer(url, cb) {
     var xhr = new XMLHttpRequest()
     xhr.open("GET", url, true)
-    xhr.setRequestHeader('JWT', sessionStorage.getItem("JWT"))
-    xhr.setRequestHeader('X-CSRFToken', csrf_token)
+    //xhr.setRequestHeader('JWT', sessionStorage.getItem("JWT"))
+    //xhr.setRequestHeader('X-CSRFToken', csrf_token)
     xhr.timeout = 200;
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {

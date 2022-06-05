@@ -1,8 +1,8 @@
-function append_item(item) {
+function appendItem(item) {
     var li = document.createElement("li")
-    var text_node = document.createTextNode(item)
+    var textNode = document.createTextNode(item)
 
-    li.appendChild(text_node)
+    li.appendChild(textNode)
 
     li.id = "item_" + Number(1 + ul.childNodes.length)
  

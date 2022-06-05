@@ -101,6 +101,7 @@ a {
 table {
     width: 100%;
     border-collapse: collapse;
+
 }
 table, th, td {
     border: 0.2vh solid black;
@@ -164,3 +165,74 @@ table, th, td {
 
 
 
+
+
+.form {
+    width:350px;
+    height: 300px;
+    position:absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.form .form-field::before {
+    font-size:20px;
+    position:absolute;
+    left:100px;
+    top:17px;
+    color:#888;
+    content:" ";
+    display:block;
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+.form .form-field {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack:justify;
+    -ms-flex-pack:justify;
+    justify-content:space-between;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center;
+    margin-bottom:1rem;
+    position:relative
+}
+.form input {
+    font-family: 'Oswald', sans-serif;
+    width:100%;
+    outline:none;
+    background-color:#fff;
+    border-radius:4px;
+    border:none;
+    display:block;
+    padding:.9rem .7rem;
+    box-shadow:0 3px 6px rgba(0,0,0,.16);
+    font-size:17px;
+    color:#4a4a4a;
+    text-indent: 20px;
+}
+.btnl {
+    font-family: 'Oswald', sans-serif;
+    outline:none;
+    border:none;
+    cursor:pointer;
+    display:inline-block;
+    margin:0 auto;
+    padding:.9rem 2.5rem;
+    text-align:center;
+    background-color: grey;
+    color:#fff;
+    border-radius:4px;
+    box-shadow:0 3px 6px rgba(0,0,0,.16);
+    font-size:17px
+}
+
+.logol {
+    color: whitesmoke;
+    font-size: 55px;
+    font-family: "Bebas Neue";
+}

@@ -1,4 +1,4 @@
-function generate_page_code() {
+function generatePageCode() {
     html = document.querySelector("html")
     html.lang = "ru"
     body = document.querySelector("body")
@@ -10,53 +10,53 @@ function generate_page_code() {
     house.append(legend = document.createElement("span"))
     logo.append(menu = document.createElement("div"))
 
-    buttons_names = ["новости", "эвенты", "пакеты", "железо", "коннект"]
-    buttons_names.map(x => {
+    buttonsNames = ["новости", "эвенты", "пакеты", "железо", "коннект"]
+    buttonsNames.map(x => {
         menu.append(el = document.createElement("a"))
         el.className = "button"           
         el.textContent = x
-        el.onclick = navigation_bar
+        el.onclick = navigationBar
     })
 
     nav.append(scroll = document.createElement("div"))
-    scroll.append(items_block = document.createElement("div"))
-    scroll.append(text_block = document.createElement("div"))
-    scroll.append(color_block = document.createElement("div"))
+    scroll.append(itemsBlock = document.createElement("div"))
+    scroll.append(textBlock = document.createElement("div"))
+    scroll.append(colorBlock = document.createElement("div"))
 
-    items_block.append(ul = document.createElement("ul"))
+    itemsBlock.append(ul = document.createElement("ul"))
 
-    nav.className = "nav"; logo.className = "logo"; color_block.className = "color_block";
-    scroll.className = "scroll"; items_block.className = "items_block";
-    text_block.className = "text_block"; house.className = "house";
+    nav.className = "nav"; logo.className = "logo"; colorBlock.className = "color_block";
+    scroll.className = "scroll"; itemsBlock.className = "items_block";
+    textBlock.className = "text_block"; house.className = "house";
     menu.className = "menu"; legend.className = "legend";
     
-    text_block.style.display = "none"
+    textBlock.style.display = "none"
     legend.textContent = "GAME HOUSE"
 
     main = document.createElement("main")
     body.append(main)
     
-    walls_id = ["wall_1", "wall_2", "wall_3", "wall_4"]
-    walls_id.map(x => {
+    wallsId = ["wall_1", "wall_2", "wall_3", "wall_4"]
+    wallsId.map(x => {
         main.append(el = document.createElement("div"))
         el.className = "wall"
         el.id = x
     })
 
-    main.append(grid_blok_1 = document.createElement("div"))
-    grid_blok_1.className = "grid-container_1"
+    main.append(gridBlok_1 = document.createElement("div"))
+    gridBlok_1.className = "grid-container_1"
     for(let i = 1; i < 13; i++) {
-        grid_blok_1.append(el = document.createElement("div"))
+        gridBlok_1.append(el = document.createElement("div"))
         el.append(span = document.createElement("div"))
         span.textContent = i
         el.id = "place_" + i
         el.className = "gplace"
     }
 
-    main.append(grid_blok_2 = document.createElement("div"))
-    grid_blok_2.className = "grid-container_2"
+    main.append(gridBlok_2 = document.createElement("div"))
+    gridBlok_2.className = "grid-container_2"
     for(let i = 13; i < 18; i++) {
-        grid_blok_2.append(el = document.createElement("div"))
+        gridBlok_2.append(el = document.createElement("div"))
         el.append(span = document.createElement("div"))
         span.textContent = i
         el.id = "place_" + i

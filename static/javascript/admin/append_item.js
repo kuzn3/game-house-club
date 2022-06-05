@@ -1,14 +1,15 @@
-function append_item(item) {
+function appendItem(item) {
+    input = document.querySelector("input")
     if(input.value != "") {
         var li = document.createElement("li")
-        var text_node = document.createTextNode(input.value)
+        var textNode = document.createTextNode(input.value)
 
-        obj_list = url_for_request == "news" ? obj_news : obj_akie
-        obj_list[Object.keys(obj_list).length] = input.value
+        objList = urlForRequest == "news" ? objNews : objAkie
+        objList[Object.keys(objList).length] = input.value
     }
     else { 
         var li = document.createElement("li")
-        var text_node = document.createTextNode(item)
+        var textNode = document.createTextNode(item)
     }
 
     var span = document.createElement("span")
@@ -16,18 +17,19 @@ function append_item(item) {
     span.textContent = "\u00D7"
     span.contentEditable = "false"
     span.className = "close"
-    span.onclick = delete_item
+    span.onclick = deleteItem
     
     li.appendChild(span)
-    li.appendChild(text_node)
+    li.appendChild(textNode)
     li.contentEditable = "true"
-    li.oninput = update_item
+    li.oninput = updateItem
+
     li.id = "item_" + Number(1 + ul.childNodes.length)
     
     if(input.value != "") {
-        info = [li.id, text_node.data]
-        post_data_to_server(info, "/append_" + url_for_request, function(response_state) {
-            if(response_state == Error) {
+        info = [li.id, textNode.data]
+        postDataToServer(info, "/append_" + urlForRequest, function(responseState) {
+            if(responseState == Error) {
                 console.error("error")
             }
             else { 

@@ -7,9 +7,6 @@ from hashlib import sha256
 import os, random
 
 
-JWT_tokens = []
-
-
 def get_data_from_db(table):
     dict = {}
     data = db.session.execute("SELECT * FROM {}".format(table)).cursor.fetchall()
@@ -32,7 +29,7 @@ db = SQLAlchemy(app)
 
 #sess = Session(app)
 
-csrf = CSRFProtect(app)
+#csrf = CSRFProtect(app)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,24 +53,18 @@ class Place(db.Model):
     state = db.Column(db.String(5), unique=False)
 
 
-
-@app.route("/login", methods = ["GET", "POST"])
+@app.post("/login")
 def login():
-    if "user_id" in session:
-        return redirect(url_for("admin"))
-    if request.method == "POST":
         session.pop("user_id", None)
-        username = str(request.form["username"])
-        password = str(request.form["password"])
+        username = str(request.form["key"])
+        password = str(request.form["value"])    
         try:
             user = [x for x in User.query.all() if x.username == username and x.password == password][0]
             session["user_id"] = user.id
-            JWT_token = sha256(str(username + "_" + password).encode("UTF-8")).hexdigest()
-            JWT_tokens.append(JWT_token)
-            return redirect(url_for("admin"))
+            #JWT_token = sha256(str(username + "_" + password).encode("UTF-8")).hexdigest()
+            return "OK"
         except:
-            return redirect(url_for("login"))
-    return render_template("login.html")
+            return "ERROR"
 
 @app.get("/admin")
 def admin():
@@ -81,16 +72,14 @@ def admin():
         return redirect(url_for("login"))
     return render_template("admin.html")
 
-@app.get("/")
+@app.route("/", methods = ["GET", "POST"])
 def user():
     return render_template("user.html")
 
+
 @app.post("/append_<table>")
-@csrf.exempt
 def append(table):
-    JWT = request.headers.get("JWT")
-    print(JWT, JWT_tokens)
-    if "user_id" not in session or JWT not in JWT_tokens:
+    if "user_id" not in session:
         return abort(420)
     db.session.execute("INSERT INTO {} (item) VALUES (\"{}\")".format(table, request.form.get("value")))
     db.session.commit()
@@ -98,9 +87,7 @@ def append(table):
 
 @app.post("/delete_<table>")
 def delete(table):
-    JWT = request.headers.get("JWT")
-    print(JWT, JWT_tokens)
-    if "user_id" not in session or JWT not in JWT_tokens:
+    if "user_id" not in session:
         return abort(420)
     db.session.execute("DELETE FROM {} WHERE item = \"{}\"".format(table, request.form.get("value")))
     db.session.commit()
@@ -108,8 +95,7 @@ def delete(table):
 
 @app.post("/update_<table>")
 def update(table):
-    JWT = request.headers.get("JWT")
-    if "user_id" not in session or JWT not in JWT_tokens:
+    if "user_id" not in session:
         return abort(420)
     db.session.execute("UPDATE {} SET item = \"{}\" WHERE id = \"{}\"".format(table, request.form.get("value"), request.form.get("key").replace("item_", "")))
     db.session.commit()
@@ -122,8 +108,8 @@ def get_data(table):
 
 @app.post("/place")
 def place():
-    JWT = request.headers.get("JWT")
-    if "user_id" not in session or JWT not in JWT_tokens:
+    if "user_id" not in session:
+        print(session)
         return abort(420)
     db.session.execute("UPDATE place SET state = \"{}\" WHERE id = \"{}\"".format(request.form.get("value"), request.form.get("key")))
     db.session.commit()

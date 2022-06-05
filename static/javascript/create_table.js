@@ -1,29 +1,31 @@
-function generate_thead(table_name) {
-    var tbl = document.createElement("table")
-    tbl.append(tbl_head = document.createElement("thead"))
-    tbl_head.append(table_head_row = document.createElement("tr"))
-    table_head_row.append(tbl_head_column = document.createElement("th"))
-    tbl_head_column.appendChild(document.createTextNode(table_name))
-    text_block.appendChild(tbl)
+function generateThead(tableName) {
+    var table = document.createElement("table")
+    table.append(tableHead = document.createElement("thead"))
+    tableHead.append(tableHeadRow = document.createElement("tr"))
+    tableHeadRow.append(tableHeadColumn = document.createElement("th"))
+    tableHeadColumn.appendChild(document.createTextNode(tableName))
+    textBlock.appendChild(table)
 }
 
-function generate_table(rows, columns, info) {
-    var tbl = document.createElement("table")
-    var tbl_body = document.createElement("tbody")
+function generateTable(rows, columns, info) {
+    var table = document.createElement("table")
+    var tableBody = document.createElement("tbody")
 
     data = [Object.keys(info),Object.values(info)]
-    append_text_in_table(rows, columns, data, tbl_body)
+    appendTextInTable(rows, columns, data, tableBody)
     
-    tbl.appendChild(tbl_body)
-    text_block.appendChild(tbl)
-    tbl.style.border = "2"
+    table.append(tableBody)
+    textBlock.append(table)
+    table.style.border = "2"
 }
 
-function append_text_in_table(rows, columns, info, tbl_body) {
-    console.log(info)
+function appendTextInTable(rows, columns, info, tableBody) {
+    console.log(1)
     for(var i = 0; i < rows; i++) {
+        console.log(2)
         var row = document.createElement("tr")
         for(var j = 0; j < columns; j++) {
+            console.log(3)
             var cell = document.createElement("td")
             var cellText = document.createTextNode(info[i][j])
             cell.appendChild(cellText)
@@ -33,14 +35,14 @@ function append_text_in_table(rows, columns, info, tbl_body) {
             //onerror UPDATE LIST ?
             //.....html + js for User ~
         }
-        tbl_body.appendChild(row)
+        tableBody.appendChild(row)
     }
 }
 
-function cell_update() {
+function cellUpdate() {
     info = [this.id, [this.textContent, this.parentElement.parentElement.parentElement.className]] 
-        post_data_to_server(info, "/update_table", function(response_state) {
-            if(response_state == Error) {
+        postDataToServer(info, "/update_table", function(responseState) {
+            if(responseState == Error) {
                 console.error("error")
             }
         })

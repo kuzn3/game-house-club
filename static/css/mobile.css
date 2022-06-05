@@ -91,7 +91,7 @@ a {
     font-size: 4vw;
     height: 5.5vw;
     width: 100%;
-    border: 0.3vh solid black;
+    border: 0.6vh solid black;
     justify-content: center;
     display: flex;
 }
