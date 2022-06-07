@@ -17,9 +17,11 @@ function requestsToServer() {
     getDataFromServer("/static/json/color.json", function(responseText) {
         theme = JSON.parse(responseText)
         random = Math.floor(Math.random() * 3)
-        timeoutF1 = setTimeout(setPlaces, 0)
-        timeoutF2 = setTimeout(setWalls, 0)
-        timeoutF3 = setTimeout(setTodo, 0)
+        timeoutF1 = setTimeout(x => {
+		setPlaces()
+		setWalls()
+		setTodo()
+		}, 50)
     })
 }
 requestsToServer()
