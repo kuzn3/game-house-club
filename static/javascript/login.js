@@ -61,7 +61,7 @@ wall.onclick = () => {
                     calculateColorBlockSize()   
                     document.querySelectorAll(".gplace").forEach(
                         place => place.onclick = changeColor)
-                }, 75)
+                }, 150)
             }
             else(console.log(cb))
         })

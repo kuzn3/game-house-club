@@ -13,7 +13,7 @@ body {
     letter-spacing: -0.5vmin;
     font-size: 8vmin;
     display: table; 
-    border: 0.5vh solid black;
+    border: 0.6vh solid black;
 }
 .gplace div {
     display: table-cell; 
@@ -60,7 +60,7 @@ main {
     font-size: 2.5vh;
     color: white;
     width: 100%;
-    border: 0.3vh solid black;
+    border: 0.6vh solid black;
 }
 table {
     width: 100%;
@@ -96,7 +96,7 @@ a {
     display: flex;
 }
 .house {
-    border: 0.3vh solid black;
+    border: 0.6vh solid black;
     text-align: center;
     height: 8.5vw;
     width: 100%;

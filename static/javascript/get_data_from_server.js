@@ -9,7 +9,10 @@ function getDataFromServer(url, cb) {
             if(xhr.status == 200 || xhr.status == 304) {
                 cb(xhr.responseText)
             }
-            else {cb(Error)}
+            else {
+		location.reload()
+		cb(Error)
+	    }
         }   
     }
     xhr.send()

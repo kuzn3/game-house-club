@@ -48,13 +48,42 @@
             "\u041a\u043b\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0430": "HyperX Alloy FPS Pro",
             "\u041c\u0443\u0437\u044b\u043a\u0430": "HyperX Cloud ||"
         },
+<<<<<<< HEAD
         "\u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442": {
+=======
+        "стандарт-1": {
+>>>>>>> bbde1e9b7ae065d9fb5d447e464af5302bd0fab5
             "\u041c\u043e\u043d\u0438\u0442\u043e\u0440": "24\" 144Hz",
             "GPU": "GTX 1660 SUPER",
             "RAM": "8  GB 3200 MHz",
-            "\u041c\u044b\u0448\u044c": "BENQ Zowie EC2",
+            "\u041c\u044b\u0448\u044c": "Logitech G102",
             "\u041a\u043b\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0430": "HyperX Alloy FPS Pro",
             "\u041c\u0443\u0437\u044b\u043a\u0430": "HyperX Cloud ||"
+        },
+	 "стандарт-2": {
+            "\u041c\u043e\u043d\u0438\u0442\u043e\u0440": "24\" 144Hz",
+            "GPU": "GTX 1660 SUPER",
+            "RAM": "8  GB 3200 MHz",
+            "\u041c\u044b\u0448\u044c": "Steelseries rival 105",
+            "\u041a\u043b\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0430": "HyperX Alloy FPS Pro",
+            "\u041c\u0443\u0437\u044b\u043a\u0430": "HyperX Cloud Stinger Core HX-C2"
+        },
+         "стандарт-3": {
+            "\u041c\u043e\u043d\u0438\u0442\u043e\u0440": "24\" 144Hz",
+            "GPU": "GTX 1660 SUPER",
+            "RAM": "8  GB 3200 MHz",
+            "\u041c\u044b\u0448\u044c": "Logitech G102",
+            "\u041a\u043b\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0430": "HyperX Alloy FPS Pro",
+            "\u041c\u0443\u0437\u044b\u043a\u0430": "HyperX Cloud Stinger S"
+        },
+         "стандарт-4": {
+            "\u041c\u043e\u043d\u0438\u0442\u043e\u0440": "24\" 144Hz",
+            "GPU": "GTX 1660 SUPER",
+            "RAM": "8  GB 3200 MHz",
+            "\u041c\u044b\u0448\u044c": "Steelseries rival 105",
+            "\u041a\u043b\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0430": "HyperX Alloy FPS Pro",
+            "\u041c\u0443\u0437\u044b\u043a\u0430": "A4Tech Bloody G525"
         }
+
     }
 }
