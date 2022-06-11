@@ -1,10 +1,11 @@
+from time import sleep
 from flask import Flask, redirect, render_template, request, url_for, session, jsonify, abort
 from flask_security import  UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
 from hashlib import sha256
-import os, random
+import os, random, time
 
 
 def get_data_from_db(table):
@@ -55,16 +56,17 @@ class Place(db.Model):
 
 @app.post("/login")
 def login():
-        session.pop("user_id", None)
-        username = str(request.form["key"])
-        password = str(request.form["value"])    
-        try:
-            user = [x for x in User.query.all() if x.username == username and x.password == password][0]
-            session["user_id"] = user.id
-            #JWT_token = sha256(str(username + "_" + password).encode("UTF-8")).hexdigest()
-            return "OK"
-        except:
-            return "ERROR"
+    session.pop("user_id", None)
+    username = str(request.form["key"])
+    password = str(request.form["value"])    
+    try:
+        user = [x for x in User.query.all() if x.username == username and x.password == password][0]
+        session["user_id"] = user.id
+        #JWT_token = sha256(str(username + "_" + password).encode("UTF-8")).hexdigest()
+        print(request.form)
+        return "OK"
+    except:
+        return "ERROR"
 
 @app.get("/admin")
 def admin():

@@ -8,22 +8,47 @@
         <link rel="icon" href="/static/logo.jpeg">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
         <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" media="screen and (min-device-width: 1024px)" href="/static/css/styles.css">
         <link rel="stylesheet" media="screen and (max-device-width: 824px)" href="/static/css/mobile.css">
         <title>GH Club</title>
+        <style type="text/css">
+            .loader {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                color: white;
+                width: 60px;
+                height: 60px;
+                z-index: 1;
+                font-size: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .gear {
+                animation: spin 3s infinite linear;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
     </head>
     <body>
-        <script> 
-           
-        </script>
-        <script src="/static/javascript/get_data_from_server.js"></script>
+        <div class="loader"><span class="gear">⚙</span></div>
+        <script src="/static/javascript/user/generate_page_code.js"></script>
+        <script src="/static/javascript/get_data_from_server.js">/</script>
         <script src="/static/javascript/requests_to_server.js"></script>
         <script src="/static/javascript/create_table.js"></script>
         <script src="/static/javascript/user/append_item.js"></script>
         <script src="/static/javascript/navigation_bar.js"></script>
         <script src="/static/javascript/post_data_to_server.js"></script>
-        <script src="/static/javascript/user/generate_page_code.js"></script>
         <script src="/static/javascript/set_places_todo_walls.js"></script>
-        <script src="/static/javascript/login.js"></script>
+        <script src="/static/javascript/login_admin.js"></script>
     </body>
 </html>

@@ -7,7 +7,7 @@ function postDataToServer(info, url, cb) {
     xhr.timeout = 200;
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {
-            if(xhr.status == 200) {cb(true)}
+            if(xhr.response != "ERROR") {cb(true)}
             else {cb(Error)}
         }
     }

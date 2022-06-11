@@ -31,10 +31,11 @@ function setTodo() {
     window.onresize = calculateColorBlockSize()
     akieItemsList(objNews)
     heightOfColorBlockAndScrollDspl()
+    loader = document.querySelector(".loader")
+        loader.remove()
 }
 function setPlaces() {
         places = Object.entries(placesState)
-    
         placeBloks = document.getElementsByClassName("gplace")
         
         for ([key, value] of places) {
@@ -45,6 +46,7 @@ function setPlaces() {
 function heightOfColorBlockAndScrollDspl() {
     if (screen.availWidth < screen.availHeight) {
         scroll.style.display = "none"
+        colorBlock.style.display = "none"
     }
     else {
         calculateColorBlockSize()
@@ -59,8 +61,6 @@ function calculateColorBlockSize() {
     if(h <= 0) {colorBlock.style.height = "0px"}
     else {colorBlock.style.height = String(h) + "px"}
 }
-
-generatePageCode()
 
 
 

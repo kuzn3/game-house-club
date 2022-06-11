@@ -18,9 +18,11 @@ function requestsToServer() {
         theme = JSON.parse(responseText)
         random = Math.floor(Math.random() * 3)
         timeoutF1 = setTimeout(x => {
+        generatePageCode()
 		setPlaces()
 		setWalls()
 		setTodo()
+        login()
 		}, 50)
     })
 }

@@ -4,8 +4,18 @@ function appendItem(item) {
         var li = document.createElement("li")
         var textNode = document.createTextNode(input.value)
 
-        objList = urlForRequest == "news" ? objNews : objAkie
-        objList[Object.keys(objList).length] = input.value
+        switch(urlForRequest) {
+            case "news":
+                objList = objNews
+                break;
+            case "akie":
+                objList = objAkie
+                break;
+            case "connect":
+                objList = objConnect
+                break;
+        }
+        objList[Number(1 + ul.childNodes.length)] = input.value
     }
     else { 
         var li = document.createElement("li")
@@ -24,7 +34,7 @@ function appendItem(item) {
     li.contentEditable = "true"
     li.oninput = updateItem
 
-    li.id = "item_" + Number(1 + ul.childNodes.length)
+    li.id = Number(1 + ul.childNodes.length)
     
     if(input.value != "") {
         info = [li.id, textNode.data]
