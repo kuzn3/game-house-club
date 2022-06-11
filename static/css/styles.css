@@ -60,10 +60,7 @@ ul {
     padding-inline-start: 0;
     padding-inline-end: 0;
     margin-block-start: 0;
-    margin-bottom: 0;
-}
-li {
-    padding-left: 0.2vw;
+    margin: 0
 }
 li {
     padding-left: 0.2vw;
