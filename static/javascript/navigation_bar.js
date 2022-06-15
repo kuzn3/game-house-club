@@ -1,19 +1,19 @@
 function navigationBar() {
     buttonsGroup = document.getElementsByClassName("button")
-    textBlock = document.querySelector(".text_block")
+    tableBlock = document.querySelector(".table_block")
     itemsBlock = document.querySelector(".items_block")
 
     if(this.textContent == "новости") {
         scrollForMobileVersion("новости")
-        textBlock.style.display = "none"
+        tableBlock.style.display = "none"
         urlForRequest = "news"
-        akieItemsList(objNews)
+        akieItemsList(objNews, ".items_block")
     }
     else if(this.textContent == "эвенты") {
         scrollForMobileVersion("эвенты")
-        textBlock.style.display = "none"
+        tableBlock.style.display = "none"
         urlForRequest = "akie"
-        akieItemsList(objAkie)
+        akieItemsList(objAkie, ".items_block")
     }
     else if(this.textContent == "пакеты") {
         scrollForMobileVersion("пакеты")
@@ -34,37 +34,48 @@ function navigationBar() {
         clearAndDisplayTbIb()
         generateThead("Зал PC STANDART")
         generateTable(2, 6, text["пк"]["стандарт-1"])
-	generateThead("Зал PC STANDART")
+	    generateThead("Зал PC STANDART")
         generateTable(2, 6, text["пк"]["стандарт-2"])
-	generateThead("Зал PC STANDART")
+	    generateThead("Зал PC STANDART")
         generateTable(2, 6, text["пк"]["стандарт-3"])
-	generateThead("Зал PC STANDART")
+	    generateThead("Зал PC STANDART")
         generateTable(2, 6, text["пк"]["стандарт-4"])
         generateThead("Зал PC VIP")
         generateTable(2, 6, text["пк"]["вип"])
     }
     else if(this.textContent == "коннект") {
         scrollForMobileVersion("коннект")
-        textBlock.style.display = "none"
+        tableBlock.style.display = "none"
         urlForRequest = "connect"
-        akieItemsList(objConnect)
+        akieItemsList(objConnect, ".items_block")
     }
 }
-function akieItemsList(list) {
-    document.querySelector("ul").remove()
-    ul = document.createElement("ul")
-    try {itemsBlock.insertBefore(ul, input)}
-    catch {itemsBlock.appendChild(ul)}
+function akieItemsList(list, block_selector) {
+    block = document.querySelector(block_selector)
+    //console.log(block, block_selector)
+    try {
+        block.querySelector("ul").remove()
+        ul = document.createElement("ul")
+    }
+    catch {
+        ul = document.createElement("ul")
+    }
+    try {
+        block.insertBefore(ul, input)
+    }
+    catch {
+        block.appendChild(ul)
+    }
     Array.from(Object.values(list), item => {
         appendItem(item, list)
     })
-    itemsBlock.style.display = ""
-    textBlock.textContent = ""
+    block.style.display = ""
+    tableBlock.textContent = ""
 }
 function clearAndDisplayTbIb() {
-    textBlock.style.display = ""
+    tableBlock.style.display = ""
+    tableBlock.textContent = ""
     itemsBlock.style.display = "none"
-    textBlock.textContent = ""
 }
 function scrollForMobileVersion(name) {
     if (screen.availWidth < screen.availHeight) {
@@ -75,7 +86,7 @@ function scrollForMobileVersion(name) {
             }
             else if(scroll.style.display == "none") {
                 scroll.style.display = "block"
-                console.log(scroll.style.display)
+                //console.log(scroll.style.display)
             }
         }
         else if(scroll.style.display == "none") {

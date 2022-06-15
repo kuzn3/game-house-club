@@ -10,9 +10,9 @@ function getDataFromServer(url, cb) {
                 cb(xhr.responseText)
             }
             else {
-		location.reload()
-		cb(Error)
-	    }
+                location.reload()
+                cb(Error)
+            }
         }   
     }
     xhr.send()

@@ -20,17 +20,15 @@ function generatePageCode() {
 
     nav.append(scroll = document.createElement("div"))
     scroll.append(itemsBlock = document.createElement("div"))
-    scroll.append(textBlock = document.createElement("div"))
+    scroll.append(tableBlock = document.createElement("div"))
     scroll.append(colorBlock = document.createElement("div"))
-
-    itemsBlock.append(ul = document.createElement("ul"))
 
     nav.className = "nav"; logo.className = "logo"; colorBlock.className = "color_block";
     scroll.className = "scroll"; itemsBlock.className = "items_block";
-    textBlock.className = "text_block"; house.className = "house";
+    tableBlock.className = "table_block"; house.className = "house";
     menu.className = "menu"; legend.className = "legend";
     
-    textBlock.style.display = "none"
+    tableBlock.style.display = "none"
     legend.textContent = "GAME HOUSE"
 
     main = document.createElement("main")
@@ -41,6 +39,11 @@ function generatePageCode() {
         main.append(el = document.createElement("div"))
         el.className = "wall"
         el.id = x
+        if(x == "wall_4") {
+            el.innerHTML = login_html
+            btn = document.querySelector(".btnl")
+            btn.onclick = loginUser
+        }
     })
 
     main.append(gridBlok_1 = document.createElement("div"))

@@ -13,14 +13,8 @@ function setWalls() {
     .house, .menu, .color_block, .wall {
         background: ${theme[random].wall};
     }
-    ul li {
-        border: ${borderWidths[0]} solid ${theme[random].wall};
-    }
     .text_block {
         border: ${borderWidths[1]} solid ${theme[random].wall};
-    }
-    ul {
-        border: ${borderWidths[2]} solid ${theme[random].wall};
     }
     table, th, td {
         border: ${borderWidths[3]} solid ${theme[random].wall};
@@ -29,7 +23,8 @@ function setWalls() {
 }
 function setTodo() {
     window.onresize = calculateColorBlockSize()
-    akieItemsList(objNews)
+    akieItemsList(objNews, ".items_block")
+    //akieItemsList(objNews, ".right_list")
     heightOfColorBlockAndScrollDspl()
     loader = document.querySelector(".loader")
         loader.remove()

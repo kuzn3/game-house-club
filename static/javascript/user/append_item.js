@@ -4,7 +4,7 @@ function appendItem(item) {
 
     li.appendChild(textNode)
 
-    li.id = "item_" + Number(1 + ul.childNodes.length)
+    li.id = Number(1 + ul.childNodes.length)
  
     ul.insertBefore(li, ul.children[0]) 
 } 

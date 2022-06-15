@@ -4,7 +4,7 @@ function generateThead(tableName) {
     tableHead.append(tableHeadRow = document.createElement("tr"))
     tableHeadRow.append(tableHeadColumn = document.createElement("th"))
     tableHeadColumn.appendChild(document.createTextNode(tableName))
-    textBlock.appendChild(table)
+    tableBlock.appendChild(table)
 }
 
 function generateTable(rows, columns, info) {
@@ -15,17 +15,17 @@ function generateTable(rows, columns, info) {
     appendTextInTable(rows, columns, data, tableBody)
     
     table.append(tableBody)
-    textBlock.append(table)
+    tableBlock.append(table)
     table.style.border = "2"
 }
 
 function appendTextInTable(rows, columns, info, tableBody) {
-    console.log(1)
+    //console.log(1)
     for(var i = 0; i < rows; i++) {
-        console.log(2)
+        //console.log(2)
         var row = document.createElement("tr")
         for(var j = 0; j < columns; j++) {
-            console.log(3)
+            //console.log(3)
             var cell = document.createElement("td")
             var cellText = document.createTextNode(info[i][j])
             cell.appendChild(cellText)
@@ -41,9 +41,9 @@ function appendTextInTable(rows, columns, info, tableBody) {
 
 function cellUpdate() {
     info = [this.id, [this.textContent, this.parentElement.parentElement.parentElement.className]] 
-        postDataToServer(info, "/update_table", function(responseState) {
-            if(responseState == Error) {
-                console.error("error")
-            }
-        })
+    postDataToServer(info, "/update_table", function(responseState) {
+        if(responseState == Error) {
+            console.error("error")
+        }
+    })
 }

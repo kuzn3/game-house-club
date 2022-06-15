@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <link rel="icon" href="/static/logo.jpeg">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+        <style>
+            body {
+                height: 100vh;
+                width: 100vw;
+                background-color: black;
+            }
+            header {
+                position: relative;
+                height: 15vh;
+                width: 100vw;
+                top: 0;
+                background-color: rgb(64, 63, 61);
+            }
+            .title {
+                position: absolute;
+                top: 38%;
+                left: 20%;
+                transform: translate(-50%, -50%);
+                font-size: 10vh;
+                color: white;
+                font-family: 'Bebas Neue', cursive;
+            }
+            .subtitle {
+                position: absolute;
+                top: 72%;
+                left: 14%;
+                transform: translate(-50%, -50%);
+                font-size: 5vh;
+                color: white;
+                font-family: 'Oswald', cursive;
+            }
+            .buttons {
+                position: absolute;
+                top: 61%;
+                right: 3%;
+                color: white;
+                font-size: 3vh;
+                font-family: 'Oswald', cursive;
+            }
+            .buttons a {
+                color: white;
+                margin: 1vw;
+            }
+            .logo {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+        </style>
+        <style>
+            main {
+                width: 35vw;
+                height: 85vh;
+                position: relative;
+                left: 0;
+                font-family: 'Oswald', cursive;
+                background-color: rgb(115, 114, 114); 
+                overflow: scroll;
+            }
+            .item {
+                height: 20%;
+                left: 0;
+                background-color: rgba(166, 165, 164, 0.2);
+                margin-top: 1%;
+                margin-bottom: 1%;
+                position: relative;
+            }
+            .event {
+                position: relative;
+                height: 90%;
+                width: 30%;
+                background-image: url("hero.png");
+                background-size: cover;
+                left: 1.7%;
+                top: 5%;
+            }
+            .item#i1 {
+                margin-top: 2.5%;
+            }
+            ::-webkit-scrollbar {
+                display: none;
+            }
+            .ct {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <div class="title">GAME HOUSE</div>
+                <div class="subtitle">компьютерный клуб</div>
+                <div class="buttons">
+                    <a>Статистика</a>
+                    <a>Турнир</a>
+                    <a>Бронирование</a>
+                    <a>Профиль</a>
+                    <a>Акции</a>
+                    <a>Новости</a>
+                    <a>Выход</a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="item" id="i1">
+                <div class="event"></div>
+                <div class="ct">Профиль</div>
+            </div>
+            <div class="item" id="2">
+                <div class="ct">Онлайн</div>
+            </div>  
+            <div class="item" id="3">
+                <div class="ct">Инвентарь</div>
+            </div>  
+            <div class="item" id="4">
+                <div class="ct">Акция</div>
+            </div>
+            <div class="item" id="5">
+                <div class="ct">Купон</div>
+            </div>    
+
+        </main>
+        <footer>
+            
+        </footer>
+    </body>
+    <script src="../static/javascript/user/append_item.js"></script>
+    <script src="../static/javascript/navigation_bar.js"></script>
+    <script src="../static/javascript/get_data_from_server.js"></script>
+    <script src="../static/javascript/requests_to_server.js"></script>
+    <script></script>
+</html>

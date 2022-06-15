@@ -10,11 +10,8 @@ body {
     width: 30%;
     height: 50%;
 }
-.logo {
-    height: 7.8vw;
-}
 .scroll {
-    height: calc(100% - 7.8vw);
+    height: calc(100% - 7.65vw);
     overflow: scroll;
     width: 100%;
     white-space: pre-wrap;
@@ -23,25 +20,12 @@ body {
     color: white;
     hyphens: auto;
 }
-a:hover {
-    opacity: 0.65;
-}
-.button {
-    width: 20%;
-}
 .color_block {
     text-align: center;
     font-size: 3vw;
     font-family: "Bebas Neue";
     height: 100%;
     width: 100%;
-}
-.menu {
-    border-top: 0.2vw solid black;
-    font-size: 1.5vw;
-    height: 2vw;
-    justify-content: center;
-    display: flex;
 }
 .house {
     height: 5.45vw;
@@ -63,14 +47,27 @@ ul {
     margin: 0
 }
 li {
+    margin-top: 2%;
     padding-left: 0.2vw;
 }
+.menu {
+    height: 2.2vw;
+    justify-content: center;
+    display: flex;
+    margin: 0;
+    width: 100%;
+}
 a {
-    font-family: 'Oswald', sans-serif;
-    text-align: center;
     position: relative;
-    bottom: 15%;
+    text-align: center; 
+    font-size: 1.3vw;
+    font-family: 'Oswald', sans-serif;
+    width: 20%;
+    height: 100%;
     cursor: pointer;
+}
+a:hover {
+    opacity: 0.65;
 }
 .wall {
     position: absolute;
@@ -85,6 +82,7 @@ a {
     right: 0;
     font-family: 'Oswald', sans-serif;
     font-size: 1.3vw;
+    overflow: scroll;
 }
 #wall_3 {
     height: 34%;
@@ -236,6 +234,6 @@ table, th, td {
 
 .logol {
     color: whitesmoke;
-    font-size: 55px;
+    font-size: 52px;
     font-family: "Bebas Neue";
 }

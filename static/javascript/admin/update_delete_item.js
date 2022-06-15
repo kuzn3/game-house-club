@@ -18,17 +18,33 @@ function deleteItem() {
                     break;
             }
             delete objList[li.id]
-            this.style.display = "none"
-            li.style.display = "none"
+            li.remove()
         }
     })
 }
 function updateItem() {
     console.log(urlForRequest)
-    info = [this.id, this.textContent.replace("\u00D7", "")]
+    let text = this.textContent.replace("\u00D7", "")
+    let id = String(this.id)
+    info = [this.id, text]
+    console.log(this.textContent)
     postDataToServer(info, "/update_" + urlForRequest, function(responseState) {
         if(responseState == "ERROR") {
             console.error("error")
+        }
+        else {
+            switch(urlForRequest) {
+                case "news":
+                    objList = objNews
+                    break;
+                case "akie":
+                    objList = objAkie
+                    break;
+                case "connect":
+                    objList = objConnect
+                    break;
+            }
+            objList[id] = text
         }
     })
 }
@@ -45,7 +61,6 @@ function create_input_and_button() {
     
     button.className = "btn";
     button.textContent = "\u2713"
-    button.style.background = "white"
     button.onclick = appendItem
 }
 

@@ -17,7 +17,7 @@ function requestsToServer() {
     getDataFromServer("/static/json/color.json", function(responseText) {
         theme = JSON.parse(responseText)
         random = Math.floor(Math.random() * 3)
-        timeoutF1 = setTimeout(x => {
+        timeoutF1 = setTimeout(() => {
         generatePageCode()
 		setPlaces()
 		setWalls()
