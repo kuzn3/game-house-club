@@ -32,13 +32,13 @@ body {
     width: 100%;
 }
 .house {
-    height: 98px;
+    height: 2.05cm;
     width: 100%;
 }
 .legend {
     font-family: "Bebas Neue";
     position: relative;
-    font-size: 7.8vw;
+    font-size: 3cm;
     top: -1.55vw;
     left: 0.05vw;
 }
