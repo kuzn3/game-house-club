@@ -10,6 +10,10 @@ body {
     width: 30%;
     height: 50%;
 }
+.logo {
+    display: flex;
+    flex-direction: column;
+}
 .scroll {
     height: calc(100% - 7.65vw);
     overflow: scroll;
@@ -28,7 +32,7 @@ body {
     width: 100%;
 }
 .house {
-    height: 5.45vw;
+    height: 98px;
     width: 100%;
 }
 .legend {
@@ -233,6 +237,7 @@ table, th, td {
 }
 
 .logol {
+    text-align: center;
     color: whitesmoke;
     font-size: 52px;
     font-family: "Bebas Neue";

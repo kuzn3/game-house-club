@@ -2,7 +2,7 @@ login_html =
 `
 <div class=\"loader\" style="display: none;"><span class=\"gear\">⚙</span></div>
 <div class="form">
-    <div class="logol">GAME HOUSE 🕹️ USER</div>
+    <div class="logol">GAME HOUSE 🕹️</div>
     <div class="form-field">
         <input type="username" placeholder="Username" required name="username">
     </div>
