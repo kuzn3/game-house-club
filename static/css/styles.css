@@ -11,33 +11,35 @@ body {
     height: 50%;
     display: flex;
     flex-direction: column;
-    align-content: center;
 }
-.scroll {
-    height: calc(100% - 7.65vw);
+.scroll, .right_list {
+    height: auto;
     overflow: scroll;
     width: 100%;
+    font-size: 1.3vw;
     white-space: pre-wrap;
     font-family: 'Oswald', sans-serif;
-    font-size: 1.3vw;
     color: white;
     hyphens: auto;
 }
-.color_block {
-    text-align: center;
-    font-size: 3vw;
-    font-family: "Bebas Neue";
-    height: 100%;
-    width: 100%;
-}
 .house {
-    width: 100%;
+    width: 100%; 
+    image-resolution: 100%x;
 }
 .legend {
     font-family: "Bebas Neue";
-    font-size: 7.8vw;
+    top: 0;
+    width: 100%;
 }
+.logo {  
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+}
+
 ul {
+    font-family: 'Oswald', sans-serif;
     list-style-position: outside;
     list-style-type: none;
     padding-inline-start: 0;
@@ -49,19 +51,21 @@ li {
     margin-top: 2%;
     padding-left: 0.2vw;
 }
+li:first-child {
+    margin-top: 1%;
+}
 .menu {
+    font-size: 1.5vw;
     height: 2.2vw;
     justify-content: center;
     display: flex;
-    margin: 0;
-    width: 100%;
 }
 a {
     position: relative;
     text-align: center; 
     font-size: 1.3vw;
     font-family: 'Oswald', sans-serif;
-    width: 20%;
+    width: 33%;
     height: 100%;
     cursor: pointer;
 }
@@ -79,8 +83,6 @@ a:hover {
     height: 45.3%;
     bottom: 0;
     right: 0;
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.3vw;
     overflow: scroll;
 }
 #wall_3 {
@@ -99,6 +101,7 @@ a:hover {
     left: 60%;
 }
 table {
+    font-size: 1.2vw;
     width: 100%;
     border-collapse: collapse;
 
@@ -121,10 +124,10 @@ table, th, td {
     height: 100%;
     font-family: "Bebas Neue";
     letter-spacing: -0.5vmin;
-    font-size: 8vmin;
+    font-size: 7.5vmin;
     display: table; 
 }
-.gplace div {
+.gplace span {
     display: table-cell; 
     vertical-align: middle; 
     text-align: center;
@@ -168,72 +171,43 @@ table, th, td {
 
 
 .form {
-    width:350px;
-    height: 300px;
-    position:absolute;
+    width: 30%;
+    height: 15%;
+    position: absolute;
     margin: auto;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    
 }
-.form .form-field::before {
-    font-size:20px;
-    position:absolute;
-    left:100px;
-    top:17px;
-    color:#888;
-    content:" ";
-    display:block;
-    background-size:cover;
-    background-repeat:no-repeat;
-}
-.form .form-field {
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-pack:justify;
-    -ms-flex-pack:justify;
-    justify-content:space-between;
-    -webkit-box-align:center;
-    -ms-flex-align:center;
-    align-items:center;
-    margin-bottom:1rem;
-    position:relative
-}
-.form input {
-    font-family: 'Oswald', sans-serif;
-    width:100%;
-    outline:none;
-    background-color:#fff;
-    border-radius:4px;
-    border:none;
-    display:block;
-    padding:.9rem .7rem;
-    box-shadow:0 3px 6px rgba(0,0,0,.16);
-    font-size:17px;
-    color:#4a4a4a;
-    text-indent: 20px;
-}
-.btnl {
-    font-family: 'Oswald', sans-serif;
-    outline:none;
-    border:none;
-    cursor:pointer;
-    display:inline-block;
-    margin:0 auto;
-    padding:.9rem 2.5rem;
-    text-align:center;
-    background-color: grey;
-    color:#fff;
-    border-radius:4px;
-    box-shadow:0 3px 6px rgba(0,0,0,.16);
-    font-size:17px
+.form-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10%;
 }
 
-.logol {
+.form input {
     text-align: center;
-    color: whitesmoke;
-    font-size: 52px;
-    font-family: "Bebas Neue";
+    -webkit-text-fill-color: black;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-color: black;
+    outline: none;
+    width: 100%;
+}
+input:-webkit-autofill {
+    -webkit-text-fill-color: black;
+    outline: none;
+}
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: black;
+    outline: none;
+}
+.btnl {
+    width: 50%;
+    border: none;
 }

@@ -1,8 +1,8 @@
 login_html = 
 `
 <div class=\"loader\" style="display: none;"><span class=\"gear\">⚙</span></div>
+<div class="login_form">
 <div class="form">
-    <div class="logol">GAME HOUSE 🕹️</div>
     <div class="form-field">
         <input type="username" placeholder="Username" required name="username">
     </div>
@@ -21,16 +21,6 @@ function login() {
     //console.log(wall)
     wall.onclick = () => {
         head = document.querySelector("head")
-        head.append(style = document.createElement("style"))
-        style.innerHTML = 
-        `
-        .btnl:hover {
-            background-color: ${theme[random].free};
-        }
-        .logol {
-            text-shadow: 0.15vw 0.15vw ${theme[random].free};
-        }
-        `
         body.innerHTML = login_html
         loader = document.querySelector(".loader")
         form = document.querySelector(".form")
@@ -70,7 +60,6 @@ function loginAdmin() {
             f1Timeout = setTimeout( () => {
                 create_input_and_button()
                 akieItemsList(objNews, ".items_block")
-                calculateColorBlockSize()   
                 document.querySelectorAll(".gplace").forEach(
                     place => place.onclick = changeColor)
                 loader.remove()
@@ -97,7 +86,7 @@ function loginUser() {
             form.remove()
             el.style.backgroundColor = "black"
             el.append(menu = document.createElement("div"))
-            buttonsNames = ["профиль", "турнир", "статистика", "выход"]
+            buttonsNames = ["профиль", "турнир", "статистика"]
             buttonsNames.map(x => {
                 menu.append(el_ = document.createElement("a"))
                 el_.className = "button"           

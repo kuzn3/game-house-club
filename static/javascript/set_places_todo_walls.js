@@ -19,10 +19,24 @@ function setWalls() {
     table, th, td {
         border: ${borderWidths[3]} solid ${theme[random].wall};
     }
+    input:-webkit-autofill, .form input, input:-webkit-autofill:focus {
+        box-shadow: 0 0 0px 1000px ${theme[random].wall} inset;
+    }
+    .form input {
+        background-color: ${theme[random].wall};
+    }
+    .btnl:hover {
+        background-color: ${theme[random].busy};
+    }
+    .btnl {
+        background-color: ${theme[random].free};
+    }
+    .logol {
+        text-shadow: 0.15vw 0.15vw ${theme[random].free};
+    }
     `
 }
 function setTodo() {
-    window.onresize = calculateColorBlockSize()
     akieItemsList(objNews, ".items_block")
     //akieItemsList(objNews, ".right_list")
     heightOfColorBlockAndScrollDspl()
@@ -41,21 +55,7 @@ function setPlaces() {
 function heightOfColorBlockAndScrollDspl() {
     if (screen.availWidth < screen.availHeight) {
         scroll.style.display = "none"
-        colorBlock.style.display = "none"
-    }
-    else {
-        calculateColorBlockSize()
-        window.onresize = () => {
-            calculateColorBlockSize()
-        }
     }
 } 
-function calculateColorBlockSize() {
-    colorBlock = document.querySelector(".color_block")
-    h = scroll.offsetHeight - itemsBlock.offsetHeight
-    if(h <= 0) {colorBlock.style.height = "0px"}
-    else {colorBlock.style.height = String(h) + "px"}
-}
-
 
 
