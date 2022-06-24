@@ -1,12 +1,43 @@
-from time import sleep
+from asyncio import sslproto
 from flask import Flask, redirect, render_template, request, url_for, session, jsonify, abort
 from flask_security import  UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
-from hashlib import sha256
-import os, random, time
+import os, random, time, requests, rsa, json
 
+def load_json(file_name):
+    with open(file_name, "r") as f:
+        data = json.load(f)
+    return data
+def save_json(created_file_name, data):
+    with open(created_file_name, "w") as f:
+        json.dump(data, f, indent=4)
+
+login_data = {
+    "Username": "",
+    "Password": ""
+    }
+def request_to_APC(URL, created_file_name, login_data):
+    x = requests.get("http://188.235.104.21:65000" + URL, data=login_data)
+    print(x.text, login_data)
+    #encryptet_data = x.text
+    data = json.loads(x.text)
+    save_json(created_file_name, data)
+    return data
+
+#son_from_APC_dir = "./static/json_from_APC/"
+#hosts = request_to_APC("/hosts",json_from_APC_dir + "hosts.json", login_data)
+
+
+
+
+#encryptet_data = bytes(x.text, "")
+#print(encryptet_data)
+#with open("private_key.pem", "rb") as f:
+#    private_key = rsa.PrivateKey.load_pkcs1(f.read())
+#print(private_key)
+#decryptet_data = rsa.decrypt(encryptet_data, private_key).decode("UTF-8")
 
 def get_data_from_db(table):
     dict = {}
@@ -53,20 +84,30 @@ class Place(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     state = db.Column(db.String(5), unique=False)
 
+json_from_APC_dir = "./static/json_from_APC/"
 
 @app.post("/login")
 def login():
-    session.pop("user_id", None)
-    username = str(request.form["key"])
-    password = str(request.form["value"])    
-    try:
-        user = [x for x in User.query.all() if x.username == username and x.password == password][0]
-        session["user_id"] = user.id
-        #JWT_token = sha256(str(username + "_" + password).encode("UTF-8")).hexdigest()
-        print(request.form)
-        return "OK"
-    except:
-        return "ERROR"
+        session.pop("user_id", None)
+        username = str(request.form["key"])
+        password = str(request.form["value"]) 
+        login_data.update({"user": username})
+        login_data.update({"pass": password})
+        login_result = request_to_APC("/login", json_from_APC_dir + "login_result.json", login_data)  
+        if(login_result["result"]==0):
+            session["user_id"] = login_result["userId"]
+            user = request_to_APC("/userId/{}".format(login_result["userId"]), json_from_APC_dir + "user_{}.json".format(login_result["userId"]), login_data)
+            strings = ["address", "billingOptions", "birthDate", "createdById", "enableDate", "guid", "identification", 
+                "isDeleted", "isDisabled", "isNegativeBalanceAllowed", "isPersonalInfoRequested", "postCode", "sex", "smartCardUID"]
+            for string in strings:
+                user["result"].pop(string)
+            print(user["result"])
+            return user["result"]
+        elif(login_result["result"]==8):
+            return "Uncorrect Username/Password"
+        else:
+            return "Error"
+
 
 @app.get("/admin")
 def admin():
@@ -76,6 +117,11 @@ def admin():
 
 @app.route("/", methods = ["GET", "POST"])
 def user():
+    user_sessions = request_to_APC("/usersessions", json_from_APC_dir + "active_user_sessions.json", login_data)
+    #print(user_sessions)
+
+    #save_json(json_from_APC_dir + "hostId_hostName.json", hostId_hostName_user)
+    save_json(json_from_APC_dir + "hostId_hostName.json", user_sessions)
     return render_template("user.html")
 
 
@@ -126,4 +172,4 @@ def logout():
     return redirect(url_for(".user"))
 
 if __name__ == "__main__":
-	app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+	app.run(debug=True, port=int(os.environ.get("PORT", 5000)))

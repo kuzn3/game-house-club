@@ -44,12 +44,15 @@ function setTodo() {
         loader.remove()
 }
 function setPlaces() {
-        places = Object.entries(placesState)
+        console.log(objHostNames)
+        places = Object.values(objHostNames)
         placeBloks = document.getElementsByClassName("gplace")
-        
-        for ([key, value] of places) {
-            style = value == "free" ? theme[random].free : theme[random].busy
-            placeBloks[key - 1].style.background = style
+        for (place of placeBloks) {
+            place.style.background = theme[random].free
+        }
+        for (value of places) {
+            id = value - 1
+            placeBloks[id].style.background = theme[random].busy
         }
 }
 function heightOfColorBlockAndScrollDspl() {

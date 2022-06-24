@@ -2,8 +2,8 @@ function appendItem(item) {
     input = document.querySelector("input")
     if(input.value != "") {
         var li = document.createElement("li")
-        var textNode = document.createTextNode(input.value)
-
+        var text_span = document.createElement("span")
+        text_span.textContent = input.value
         switch(urlForRequest) {
             case "news":
                 objList = objNews
@@ -19,7 +19,8 @@ function appendItem(item) {
     }
     else { 
         var li = document.createElement("li")
-        var textNode = document.createTextNode(item)
+        var text_span = document.createElement("span")
+        text_span.textContent = item
     }
 
     var span = document.createElement("span")
@@ -30,19 +31,21 @@ function appendItem(item) {
     span.onclick = deleteItem
     
     li.appendChild(span)
-    li.appendChild(textNode)
+    li.appendChild(text_span)
     li.contentEditable = "true"
     li.oninput = updateItem
 
     li.id = Number(1 + ul.childNodes.length)
     
     if(input.value != "") {
-        info = [li.id, textNode.data]
+        let innerHTML = li.innerHTML
+        info = [li.id, text_span.textContent]
         postDataToServer(info, "/append_" + urlForRequest, function(responseState) {
-            if(responseState == Error) {
+            if(responseState == "Error") {
                 console.error("error")
             }
-            else { 
+            else {
+                li.innerHTML = innerHTML
                 ul.insertBefore(li, ul.children[0])
                 input.value = ""
             }

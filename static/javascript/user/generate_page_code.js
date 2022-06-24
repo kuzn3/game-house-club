@@ -71,13 +71,13 @@ function generatePageCode() {
 
     main.append(blok_18 = document.createElement("div"))
     blok_18.append(span_18 = document.createElement("span"))
-    span_18.textContent = 18
+    span_18.textContent = "PS"
     blok_18.id = "place_18"
     blok_18.className = "gplace"
 
     main.append(blok_19 = document.createElement("div"))
     blok_19.append(span_19 = document.createElement("span"))
-    span_19.textContent = 19
+    span_19.textContent = "PS"
     blok_19.id = "place_19"
     blok_19.className = "gplace"
 }

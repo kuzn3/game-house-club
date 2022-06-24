@@ -1,6 +1,5 @@
 login_html = 
 `
-<div class=\"loader\" style="display: none;"><span class=\"gear\">⚙</span></div>
 <div class="login_form">
 <div class="form">
     <div class="form-field">
@@ -10,103 +9,76 @@ login_html =
         <input type="password" placeholder="Password" required name = password>
     </div>
     <div class="form-field">
-        <button class="btnl" type="submit" >Log in</button>
+        <button class="btnl" onclick=loginUser type="submit" >Log in</button>
     </div>
 </div>
 `
 
-function login() {
-    index = document.querySelector("body").innerHTML
-    wall = document.querySelector("#wall_3")
-    //console.log(wall)
-    wall.onclick = () => {
-        head = document.querySelector("head")
-        body.innerHTML = login_html
-        loader = document.querySelector(".loader")
-        form = document.querySelector(".form")
-        btn = document.querySelector(".btnl")
-        btn.onclick = loginAdmin
-        
-    }
-}
-
-function loginAdmin() {
-    loginPass = document.querySelectorAll(".form-field > input")
-    form.style.display = "none"
-    loader.style.display = "block"
-    postDataToServer([loginPass[0].value, loginPass[1].value], "/login", function(cb) {
-        if(cb != Error) {
-            //console.log(cb)
-            loader.remove()
-            body.innerHTML = index
-            itemsBlock = document.querySelector(".items_block")
-            itemsBlock.style.display = "none"
-            scroll = document.querySelector(".scroll")
-            scroll.innerHTML += "<div class=\"loader\"><span class=\"gear\">⚙</span></div>"
-            loader = document.querySelector(".loader")
-            loader.style.position = "relative"
-            document.querySelectorAll("script")[1].remove()
-            body.append(changeColor = document.createElement("script"))
-            changeColor.src = "/static/javascript/admin/change_color.js"
-            body.append(appItem = document.createElement("script"))
-            appItem.src = "/static/javascript/admin/append_item.js"
-            body.append(updDelItem = document.createElement("script"))
-            updDelItem.src = "/static/javascript/admin/update_delete_item.js"
-            //console.log(appItem.readyState)
-
-            document.querySelectorAll(".button").forEach(
-                el => el.onclick = navigationBar)
-
-            f1Timeout = setTimeout( () => {
-                create_input_and_button()
-                akieItemsList(objNews, ".items_block")
-                document.querySelectorAll(".gplace").forEach(
-                    place => place.onclick = changeColor)
-                loader.remove()
-            }, 75)
-        }
-        else {
-            loader.style.display = "none"
-            form.style.display = "block"
-            //console.log(cb)
-        }
-    })
-}
-
-
 function loginUser() {
     loginPass = document.querySelectorAll(".form-field > input")
-    form = document.querySelector(".form")
-    //console.log(loginPass)
-    postDataToServer([loginPass[0].value, loginPass[1].value], "/login", function(cb) {
-        if(cb != Error) {
-            el = document.querySelector("#wall_4")
-            //console.log(cb)
-            loader.remove()
-            form.remove()
-            el.style.backgroundColor = "black"
-            el.append(menu = document.createElement("div"))
-            buttonsNames = ["профиль", "турнир", "статистика"]
-            buttonsNames.map(x => {
-                menu.append(el_ = document.createElement("a"))
-                el_.className = "button"           
-                el_.textContent = x
-                el_.onclick = navigationBar
-                menu.className = "menu"
-            })
+    form = document.querySelector(".login_form")
+    wall = document.querySelector("#wall_4")
+    postDataToServerLoader([loginPass[0].value, loginPass[1].value], "/login", wall, function(cb) {
+        console.log(cb)
+        //loader = document.querySelector(".loader")
+        if(cb != "Error") {
+            user = JSON.parse(cb)
+            console.log(user)
+            body = document.querySelector("body")
+            if(user["userGroupId"] == 4) {
+                document.querySelectorAll("script")[1].remove()
+                body.append(changeColor = document.createElement("script"))
+                changeColor.src = "/static/javascript/admin/change_color.js"
+                body.append(appItem = document.createElement("script"))
+                appItem.src = "/static/javascript/admin/append_item.js"
+                body.append(updDelItem = document.createElement("script"))
+                updDelItem.src = "/static/javascript/admin/update_delete_item.js"
 
-            el.append(scroll = document.createElement("div"))
-            scroll.append(itemsBlock = document.createElement("div"))
-            itemsBlock.className = "right_list"
-            scroll.style.backgroundColor = "rgba(0,0,0,0.5)"
-            scroll.style.overflow = "scroll"
-            scroll.style.height = "95%"
-            scroll.style.color = "white"
-            akieItemsList(objNews, ".right_list")
+                f1Timeout = setTimeout( () => {
+                    document.querySelectorAll(".gplace").forEach(
+                        place => place.onclick = changeColor)
+                    create_input_and_button()
+                    akieItemsList(objNews, ".right_list")
+                    akieItemsList(objNews, ".items_block")
+                    //loader.remove()
+                }, 200)
+            }
+            //console.log(cb)
+            //loader.remove()
+            if(user["userGroupId"] == 4  || user["userGroupId"] == 1) {
+                body.append(usr_page = document.createElement("script"))
+                usr_page.src = "/static/javascript/admin/user_page.js"
+
+                f2Timeout = setTimeout( () => {
+                    wall.style.backgroundColor = "black"
+                    wall.append(menu = document.createElement("div"))
+                    buttonsNames = ["профиль", "турнир", "статистика"]
+                    buttonsNames.map(x => {
+                        menu.append(el_ = document.createElement("a"))
+                        el_.className = "button"           
+                        el_.textContent = x
+                        el_.onclick = user_page
+                        menu.className = "menu"
+                    })
+        
+                    wall.append(scroll = document.createElement("div"))
+                    scroll.append(itemsBlock = document.createElement("div"))
+                    itemsBlock.className = "right_list"
+                    scroll.style.backgroundColor = "rgba(0,0,0,0.5)"
+                    scroll.style.overflow = "scroll"
+                    scroll.style.height = "95%"
+                    scroll.style.color = "white"
+                    scroll.className = "right_scroll"
+                    scroll.style.height = "calc(100% - 2.2vw)"
+                    akieItemsList(objNews, ".right_list")
+                }, 150)
+            }
         }
         else {
-            loader.style.display = "none"
-            form.style.display = "block"
+            //console.log(1)
+            wall.innerHTML = login_html
+            btn = document.querySelector(".btnl")
+            btn.onclick = loginUser
             //console.log(cb)
         }
     })

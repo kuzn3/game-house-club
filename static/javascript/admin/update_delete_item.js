@@ -1,8 +1,8 @@
 function deleteItem() {
-    var li = this.parentElement
+    let li = this.parentElement
     info = [li.id, li.textContent.replace("\u00D7", "")]
     postDataToServer(info, "/delete_" + urlForRequest, function(responseState) {
-        if(responseState == "ERROR") {
+        if(responseState == "Error") {
             console.error("error")
         }
         else {
@@ -24,12 +24,12 @@ function deleteItem() {
 }
 function updateItem() {
     console.log(urlForRequest)
-    let text = this.textContent.replace("\u00D7", "")
-    let id = String(this.id)
-    info = [this.id, text]
-    console.log(this.textContent)
+    let li = this
+    let text = li.textContent.replace("\u00D7", "")
+    let id = String(li.id)
+    info = [li.id, text]
     postDataToServer(info, "/update_" + urlForRequest, function(responseState) {
-        if(responseState == "ERROR") {
+        if(responseState == "Error") {
             console.error("error")
         }
         else {

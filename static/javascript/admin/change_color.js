@@ -8,12 +8,14 @@ function changeColor() {
 }
 function sendAndChange(el, color, placeState) {
     let info = [String(el.id).replace("place_", ""), placeState]
-    postDataToServer(info, "/place", function(responseState) {
-        if(responseState == Error) {
+    let innerHTML = el.innerHTML
+    postDataToServerLoader(info, "/place", el, function(responseState) {
+        if(responseState == "Error") {
             console.error("error")
         }
         else {
             el.style.background = color 
         }
+        el.innerHTML = innerHTML
     })
 }
