@@ -1,21 +1,21 @@
-function appendItem(item) {
+function append_item(item) {
     input = document.querySelector("input")
     if(input.value != "") {
         var li = document.createElement("li")
         var text_span = document.createElement("span")
         text_span.textContent = input.value
-        switch(urlForRequest) {
+        switch(url_for_request) {
             case "news":
-                objList = objNews
+                obj_list = obj_news
                 break;
             case "akie":
-                objList = objAkie
+                obj_list = obj_akie
                 break;
             case "connect":
-                objList = objConnect
+                obj_list = obj_connect
                 break;
         }
-        objList[Number(1 + ul.childNodes.length)] = input.value
+        obj_list[Number(1 + ul.childNodes.length)] = input.value
     }
     else { 
         var li = document.createElement("li")
@@ -28,19 +28,19 @@ function appendItem(item) {
     span.textContent = "\u00D7"
     span.contentEditable = "false"
     span.className = "close"
-    span.onclick = deleteItem
+    span.onclick = delete_item
     
     li.appendChild(span)
     li.appendChild(text_span)
     li.contentEditable = "true"
-    li.oninput = updateItem
+    li.oninput = update_item
 
     li.id = Number(1 + ul.childNodes.length)
     
     if(input.value != "") {
         let innerHTML = li.innerHTML
         info = [li.id, text_span.textContent]
-        postDataToServer(info, "/append_" + urlForRequest, function(responseState) {
+        post_data_to_server(info, "/append_" + url_for_request, function(responseState) {
             if(responseState == "Error") {
                 console.error("error")
             }

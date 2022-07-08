@@ -1,0 +1,12 @@
+{
+    "version": "None",
+    "result": {
+        "userId": 9464,
+        "deposits": 0,
+        "points": 0,
+        "balance": 0.0
+    },
+    "httpStatusCode": 200,
+    "message": "None",
+    "isError": "False"
+}

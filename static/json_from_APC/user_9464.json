@@ -1,0 +1,22 @@
+{
+    "version": "None",
+    "result": {
+        "username": "test1",
+        "email": "\u042d\u043c\u0430\u0438\u043b@mail.ru",
+        "userGroupId": 4,
+        "disabledDate": "None",
+        "firstName": "\u041f\u0440\u043e\u0444\u0438\u043b\u044c",
+        "lastName": "\u0414\u043b\u044f \u0442\u0435\u0441\u0442\u0430",
+        "city": "\u041b\u0438\u043f\u0435\u0446\u043a",
+        "country": "РФ",
+        "phone": "+1",
+        "mobilePhone": "+3",
+        "modifiedById": 1,
+        "modifiedTime": "2022-06-23T03:33:22.0028017",
+        "createdTime": "2022-06-21T06:00:56.3744802",
+        "id": 9464
+    },
+    "httpStatusCode": 200,
+    "message": "None",
+    "isError": "False"
+}

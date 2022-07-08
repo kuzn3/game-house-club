@@ -1,26 +1,27 @@
-function generateThead(tableName) {
+function generate_thead(table_name) {
     var table = document.createElement("table")
-    table.append(tableHead = document.createElement("thead"))
-    tableHead.append(tableHeadRow = document.createElement("tr"))
-    tableHeadRow.append(tableHeadColumn = document.createElement("th"))
-    tableHeadColumn.appendChild(document.createTextNode(tableName))
-    tableBlock.appendChild(table)
+    table.append(table_head = document.createElement("thead"))
+    table_head.append(table_head_row = document.createElement("tr"))
+    table_head_row.append(table_head_column = document.createElement("th"))
+    table_head_column.appendChild(document.createTextNode(table_name))
+    table_block.appendChild(table)
 }
 
-function generateTable(rows, columns, info) {
+function generate_table(rows, columns, info) {
     var table = document.createElement("table")
-    var tableBody = document.createElement("tbody")
+    var table_body = document.createElement("tbody")
 
     data = [Object.keys(info),Object.values(info)]
-    appendTextInTable(rows, columns, data, tableBody)
+    append_text_in_table(rows, columns, data, table_body)
     
-    table.append(tableBody)
-    tableBlock.append(table)
+    table.append(table_body)
+    table_block.append(table)
     table.style.border = "2"
 }
 
-function appendTextInTable(rows, columns, info, tableBody) {
+function append_text_in_table(rows, columns, info, table_body) {
     //console.log(1)
+    //console.table(info)
     for(var i = 0; i < rows; i++) {
         //console.log(2)
         var row = document.createElement("tr")
@@ -35,13 +36,13 @@ function appendTextInTable(rows, columns, info, tableBody) {
             //onerror UPDATE LIST ?
             //.....html + js for User ~
         }
-        tableBody.appendChild(row)
+        table_body.appendChild(row)
     }
 }
 
-function cellUpdate() {
+function cell_update() {
     info = [this.id, [this.textContent, this.parentElement.parentElement.parentElement.className]] 
-    postDataToServer(info, "/update_table", function(responseState) {
+    post_data_to_server(info, "/update_table", function(responseState) {
         if(responseState == Error) {
             console.error("error")
         }

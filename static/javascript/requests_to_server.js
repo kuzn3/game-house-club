@@ -1,28 +1,28 @@
-function requestsToServer() {
-    getDataFromServer("/static/json/data.json", function(responseText) {
+function requests_to_server() {
+    get_data_from_server("/static/json/data.json", function(responseText) { 
         text = JSON.parse(responseText)
     })
-    getDataFromServer("/get_data_news", function(responseText) {
-        objNews = JSON.parse(responseText)
+    get_data_from_server("/get_data_news", function(responseText) {
+        obj_news = JSON.parse(responseText)
     })
-    getDataFromServer("/get_data_akie", function(responseText) {
-        objAkie = JSON.parse(responseText)
+    get_data_from_server("/get_data_akie", function(responseText) {
+        obj_akie = JSON.parse(responseText)
     })
-    getDataFromServer("/get_data_connect", function(responseText) {
-        objConnect = JSON.parse(responseText)
+    get_data_from_server("/get_data_connect", function(responseText) {
+        obj_connect = JSON.parse(responseText)
     })
-    getDataFromServer("/static/json_from_APC/hostId_hostName.json", function(responseText) {
-        objHostNames = JSON.parse(responseText)
+    get_data_from_server("/static/json_from_APC/hostId_hostName.json", function(responseText) {
+        obj_host_names = JSON.parse(responseText)
     })
-    getDataFromServer("/static/json/color.json", function(responseText) {
+    get_data_from_server("/static/json/color.json", function(responseText) {
         theme = JSON.parse(responseText)
         random = Math.floor(Math.random() * 3)
-        timeoutF1 = setTimeout(() => {
-        generatePageCode()
-		setPlaces()
-		setWalls()
-		setTodo()
-		}, 50)
+        timeout_F1 = setTimeout(() => {
+        generate_page_code()
+		set_places()
+		set_walls()
+		set_todo()
+		}, 0)
     })
 }
-requestsToServer()
+requests_to_server()

@@ -138,9 +138,9 @@ table, th, td {
 }
 .grid-container_2 {
     width: 19%;
-    height: 52%;
+    height: 52.3%;
     display: grid;
-    row-gap: 4%;
+    row-gap: 5%;
     grid-template-columns: auto auto;
     position: absolute;
     right: 0;
@@ -214,4 +214,42 @@ input:-webkit-autofill:focus {
 .btnl {
     width: 50%;
     border: none;
+}
+
+
+.user_profile {
+    height: 9vw;
+    display: grid;
+    grid-template-columns: 33.33% 66.66%;
+    grid-template-rows: 100%;
+    overflow: hidden;
+}
+.user_image {
+    width: 100%;
+    background-color: aliceblue;
+    margin-top: 9.5%;
+}
+.user_info {
+    height: 100%;
+    display: grid;
+    overflow: hidden;
+    padding-top: 3%;
+    padding-left: 7%;
+}
+.user_events {
+    display: grid;
+    height: calc(100% - 9vw);
+}
+.right_scroll {
+    display: flex;
+}
+.user_cupon {
+    margin-top: 3%;
+    display: flex;
+    height: calc(100% - 1vw);
+    width: 100%;
+}
+h1, h5 {
+    margin-top: 0;
+    margin-bottom: 0;
 }

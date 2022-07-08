@@ -1,43 +1,25 @@
-from asyncio import sslproto
 from flask import Flask, redirect, render_template, request, url_for, session, jsonify, abort
 from flask_security import  UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
-import os, random, time, requests, rsa, json
+import os, random, time, requests, rsa, json, cryptography
+from crypto import encrypt_text, decrypt_text
+from sl_json import save_json, load_json
 
-def load_json(file_name):
-    with open(file_name, "r") as f:
-        data = json.load(f)
-    return data
-def save_json(created_file_name, data):
-    with open(created_file_name, "w") as f:
-        json.dump(data, f, indent=4)
 
 login_data = {
-    "Username": "",
+    "Username": "admin_pc",
     "Password": ""
     }
+
 def request_to_APC(URL, created_file_name, login_data):
-    x = requests.get("http://188.235.104.21:65000" + URL, data=login_data)
-    print(x.text, login_data)
-    #encryptet_data = x.text
-    data = json.loads(x.text)
+    x = requests.get("http://188.235.104.21:65000" + URL + "?" + encrypt_text(str(login_data)))
+    data = decrypt_text(x.text).replace("\'", "\"").replace("None", "\"None\"").replace("False", "\"False\"")
+    data = json.loads(data)
     save_json(created_file_name, data)
     return data
 
-#son_from_APC_dir = "./static/json_from_APC/"
-#hosts = request_to_APC("/hosts",json_from_APC_dir + "hosts.json", login_data)
-
-
-
-
-#encryptet_data = bytes(x.text, "")
-#print(encryptet_data)
-#with open("private_key.pem", "rb") as f:
-#    private_key = rsa.PrivateKey.load_pkcs1(f.read())
-#print(private_key)
-#decryptet_data = rsa.decrypt(encryptet_data, private_key).decode("UTF-8")
 
 def get_data_from_db(table):
     dict = {}
@@ -88,25 +70,39 @@ json_from_APC_dir = "./static/json_from_APC/"
 
 @app.post("/login")
 def login():
+    try:
         session.pop("user_id", None)
         username = str(request.form["key"])
         password = str(request.form["value"]) 
         login_data.update({"user": username})
         login_data.update({"pass": password})
-        login_result = request_to_APC("/login", json_from_APC_dir + "login_result.json", login_data)  
+        login_result = request_to_APC("/login", json_from_APC_dir + "login_result.json", login_data)
         if(login_result["result"]==0):
+            #print("1")
             session["user_id"] = login_result["userId"]
             user = request_to_APC("/userId/{}".format(login_result["userId"]), json_from_APC_dir + "user_{}.json".format(login_result["userId"]), login_data)
-            strings = ["address", "billingOptions", "birthDate", "createdById", "enableDate", "guid", "identification", 
-                "isDeleted", "isDisabled", "isNegativeBalanceAllowed", "isPersonalInfoRequested", "postCode", "sex", "smartCardUID"]
-            for string in strings:
-                user["result"].pop(string)
+            balance = request_to_APC("/balance/{}".format(login_result["userId"]), json_from_APC_dir + "user_{}_balance.json".format(login_result["userId"]), login_data)  
+
+            user["result"]["deposits"] = balance["result"]["deposits"]
+            user["result"]["points"] = balance["result"]["points"]
+            user["result"]["balance"] = balance["result"]["balance"]
+
             print(user["result"])
+            login_data.pop("user")
+            login_data.pop("pass")
             return user["result"]
         elif(login_result["result"]==8):
+            login_data.pop("user")
+            login_data.pop("pass")
             return "Uncorrect Username/Password"
         else:
+            login_data.pop("user")
+            login_data.pop("pass")
             return "Error"
+    except:
+        login_data.pop("user")
+        login_data.pop("pass")
+        
 
 
 @app.get("/admin")
@@ -128,7 +124,7 @@ def user():
 @app.post("/append_<table>")
 def append(table):
     if "user_id" not in session:
-        return abort(420)
+        return abort(421)
     db.session.execute("INSERT INTO {} (item) VALUES (\"{}\")".format(table, request.form.get("value")))
     db.session.commit()
     return "True"
@@ -136,7 +132,7 @@ def append(table):
 @app.post("/delete_<table>")
 def delete(table):
     if "user_id" not in session:
-        return abort(420)
+        return abort(421)
     db.session.execute("DELETE FROM {} WHERE item = \"{}\"".format(table, request.form.get("value")))
     db.session.commit()
     return "True"
@@ -144,7 +140,7 @@ def delete(table):
 @app.post("/update_<table>")
 def update(table):
     if "user_id" not in session:
-        return abort(420)
+        return abort(421)
     db.session.execute("UPDATE {} SET item = \"{}\" WHERE id = \"{}\"".format(table, request.form.get("value"), request.form.get("key").replace("item_", "")))
     db.session.commit()
     return "True"
@@ -158,7 +154,7 @@ def get_data(table):
 def place():
     if "user_id" not in session:
         print(session)
-        return abort(420)
+        return abort(421)
     db.session.execute("UPDATE place SET state = \"{}\" WHERE id = \"{}\"".format(request.form.get("value"), request.form.get("key")))
     db.session.commit()
     return "True"

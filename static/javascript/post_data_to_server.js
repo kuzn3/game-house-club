@@ -1,10 +1,10 @@
-function postDataToServerLoader(info, url, el, cb) {
+function post_data_to_server_loader(info, url, el, cb) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
     //xhr.setRequestHeader('JWT', sessionStorage.getItem("JWT"))
     //xhr.setRequestHeader('X-CSRFToken', csrf_token)
-    xhr.timeout = 500;
+    //xhr.timeout = 500;
     xhr.onloadstart = function() {
     console.log(1)
        el.innerHTML = `<div class=\"loader\""><span class=\"gear\">⚙</span></div>`
@@ -15,7 +15,9 @@ function postDataToServerLoader(info, url, el, cb) {
             if(xhr.readyState === 4) {
                 if(xhr.status === 200) {
                     //console.log(xhr.response)
-                    if(xhr.response != "") {
+                    if(xhr.response != false) {
+                        console.log(1)
+                        console.log(xhr.response)
                         cb(xhr.response)
                         loader.remove()
                     }
@@ -23,6 +25,7 @@ function postDataToServerLoader(info, url, el, cb) {
                 else {
                     cb("Error")
                     loader.remove()
+                    console.log(xhr.response)
                 }
             }
         }
@@ -30,7 +33,7 @@ function postDataToServerLoader(info, url, el, cb) {
     xhr.send("key=" + info[0] + "&value=" + info[1]);
 }
 
-function postDataToServer(info, url, cb) {
+function post_data_to_server(info, url, cb) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');

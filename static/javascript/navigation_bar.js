@@ -1,56 +1,56 @@
-function navigationBar() {
-    buttonsGroup = document.getElementsByClassName("button")
-    tableBlock = document.querySelector(".table_block")
-    itemsBlock = document.querySelector(".items_block")
+function navigation_bar() {
+    buttons_group = document.getElementsByClassName("button")
+    table_block = document.querySelector(".table_block")
+    items_block = document.querySelector(".items_block")
 
     if(this.textContent == "новости") {
-        scrollForMobileVersion("новости")
-        tableBlock.style.display = "none"
-        urlForRequest = "news"
-        akieItemsList(objNews, ".items_block")
+        scroll_for_mobile_version("новости")
+        table_block.style.display = "none"
+        url_for_request = "news"
+        akie_items_list(obj_news, ".items_block")
     }
     else if(this.textContent == "эвенты") {
-        scrollForMobileVersion("эвенты")
-        tableBlock.style.display = "none"
-        urlForRequest = "akie"
-        akieItemsList(objAkie, ".items_block")
+        scroll_for_mobile_version("эвенты")
+        table_block.style.display = "none"
+        url_for_request = "akie"
+        akie_items_list(obj_akie, ".items_block")
     }
     else if(this.textContent == "пакеты") {
-        scrollForMobileVersion("пакеты")
-        clearAndDisplayTbIb()
-        generateThead("Зал PC STANDART")
-        generateTable(2, 4, text["прайс"]["стандарт"]["время"])
-        generateTable(2, 4, text["прайс"]["стандарт"]["пакеты"])
-        generateThead("PLAYSTATION 5")
-        generateTable(2, 3, text["прайс"]["сони-ст"])
-        generateThead("Зал PC VIP")
-        generateTable(2, 4, text["прайс"]["вип"]["время"])
-        generateTable(2, 4, text["прайс"]["вип"]["пакеты"])
-        generateThead("PLAYSTATION 5 VIP")
-        generateTable(2, 3, text["прайс"]["сони-вп"], "прайс сони-вп")
+        scroll_for_mobile_version("пакеты")
+        clear_and_display_tb_ib()
+        generate_thead("Зал PC STANDART")
+        generate_table(2, 4, text["прайс"]["стандарт"]["время"])
+        generate_table(2, 4, text["прайс"]["стандарт"]["пакеты"])
+        generate_thead("PLAYSTATION 5")
+        generate_table(2, 3, text["прайс"]["сони-ст"])
+        generate_thead("Зал PC VIP")
+        generate_table(2, 4, text["прайс"]["вип"]["время"])
+        generate_table(2, 4, text["прайс"]["вип"]["пакеты"])
+        generate_thead("PLAYSTATION 5 VIP")
+        generate_table(2, 3, text["прайс"]["сони-вп"], "прайс сони-вп")
     }
     else if(this.textContent == "железо") {
-        scrollForMobileVersion("железо")
-        clearAndDisplayTbIb()
-        generateThead("Зал PC STANDART")
-        generateTable(2, 6, text["пк"]["стандарт-1"])
-	    generateThead("Зал PC STANDART")
-        generateTable(2, 6, text["пк"]["стандарт-2"])
-	    generateThead("Зал PC STANDART")
-        generateTable(2, 6, text["пк"]["стандарт-3"])
-	    generateThead("Зал PC STANDART")
-        generateTable(2, 6, text["пк"]["стандарт-4"])
-        generateThead("Зал PC VIP")
-        generateTable(2, 6, text["пк"]["вип"])
+        scroll_for_mobile_version("железо")
+        clear_and_display_tb_ib()
+        generate_thead("Зал PC STANDART")
+        generate_table(2, 6, text["пк"]["стандарт-1"])
+	    generate_thead("Зал PC STANDART")
+        generate_table(2, 6, text["пк"]["стандарт-2"])
+	    generate_thead("Зал PC STANDART")
+        generate_table(2, 6, text["пк"]["стандарт-3"])
+	    generate_thead("Зал PC STANDART")
+        generate_table(2, 6, text["пк"]["стандарт-4"])
+        generate_thead("Зал PC VIP")
+        generate_table(2, 6, text["пк"]["вип"])
     }
     else if(this.textContent == "коннект") {
-        scrollForMobileVersion("коннект")
-        tableBlock.style.display = "none"
-        urlForRequest = "connect"
-        akieItemsList(objConnect, ".items_block")
+        scroll_for_mobile_version("коннект")
+        table_block.style.display = "none"
+        url_for_request = "connect"
+        akie_items_list(obj_connect, ".items_block")
     }
 }
-function akieItemsList(list, block_selector) {
+function akie_items_list(list, block_selector) {
     block = document.querySelector(block_selector)
     //console.log(block, block_selector)
     try {
@@ -67,19 +67,19 @@ function akieItemsList(list, block_selector) {
         block.appendChild(ul)
     }
     Array.from(Object.values(list), item => {
-        appendItem(item, list)
+        append_item(item, list)
     })
     block.style.display = ""
-    tableBlock.textContent = ""
+    table_block.textContent = ""
 }
-function clearAndDisplayTbIb() {
-    tableBlock.style.display = ""
-    tableBlock.textContent = ""
-    itemsBlock.style.display = "none"
+function clear_and_display_tb_ib() {
+    table_block.style.display = ""
+    table_block.textContent = ""
+    items_block.style.display = "none"
 }
-function scrollForMobileVersion(name) {
+function scroll_for_mobile_version(name) {
     if (screen.availWidth < screen.availHeight) {
-        scrollDspl = scroll.style.display
+        scroll_dspl = scroll.style.display
         if(localStorage.getItem("menu_select") == name) {
             if(scroll.style.display == "block") {
                 scroll.style.display = "none"

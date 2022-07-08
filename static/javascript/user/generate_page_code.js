@@ -1,4 +1,4 @@
-function generatePageCode() {
+function generate_page_code() {
     html = document.querySelector("html")
     html.lang = "ru"
     body = document.querySelector("body")
@@ -12,57 +12,57 @@ function generatePageCode() {
     house.src = "/static/svg.svg"
 
 
-    buttonsNames = ["новости", "эвенты", "пакеты", "железо", "коннект"]
-    buttonsNames.map(x => {
+    buttons_names = ["новости", "эвенты", "пакеты", "железо", "коннект"]
+    buttons_names.map(x => {
         menu.append(el = document.createElement("a"))
         el.className = "button"           
         el.textContent = x
-        el.onclick = navigationBar
+        el.onclick = navigation_bar
     })
 
     nav.append(scroll = document.createElement("div"))
-    scroll.append(itemsBlock = document.createElement("div"))
-    scroll.append(tableBlock = document.createElement("div"))
+    scroll.append(items_block = document.createElement("div"))
+    scroll.append(table_block = document.createElement("div"))
     
 
     nav.className = "nav"; logo.className = "logo"; 
-    scroll.className = "scroll"; itemsBlock.className = "items_block";
-    tableBlock.className = "table_block"; house.className = "house";
+    scroll.className = "scroll"; items_block.className = "items_block";
+    table_block.className = "table_block"; house.className = "house";
     menu.className = "menu"; 
     
     
-    tableBlock.style.display = "none"
+    table_block.style.display = "none"
 
 
     main = document.createElement("main")
     body.append(main)
     
-    wallsId = ["wall_1", "wall_2", "wall_3", "wall_4"]
-    wallsId.map(x => {
+    walls_id = ["wall_1", "wall_2", "wall_3", "wall_4"]
+    walls_id.map(x => {
         main.append(el = document.createElement("div"))
         el.className = "wall"
         el.id = x
         if(x == "wall_4") {
             el.innerHTML = login_html
             btn = document.querySelector(".btnl")
-            btn.onclick = loginUser
+            btn.onclick = login_user
         }
     })
 
-    main.append(gridBlok_1 = document.createElement("div"))
-    gridBlok_1.className = "grid-container_1"
+    main.append(grid_blok_1 = document.createElement("div"))
+    grid_blok_1.className = "grid-container_1"
     for(let i = 1; i < 13; i++) {
-        gridBlok_1.append(el = document.createElement("div"))
+        grid_blok_1.append(el = document.createElement("div"))
         el.append(span = document.createElement("span"))
         span.textContent = i
         el.id = "place_" + i
         el.className = "gplace"
     }
 
-    main.append(gridBlok_2 = document.createElement("div"))
-    gridBlok_2.className = "grid-container_2"
+    main.append(grid_blok_2 = document.createElement("div"))
+    grid_blok_2.className = "grid-container_2"
     for(let i = 13; i < 18; i++) {
-        gridBlok_2.append(el = document.createElement("div"))
+        grid_blok_2.append(el = document.createElement("div"))
         el.append(span = document.createElement("span"))
         span.textContent = i
         el.id = "place_" + i
@@ -81,4 +81,7 @@ function generatePageCode() {
     blok_19.id = "place_19"
     blok_19.className = "gplace"
 }
+
+
+
 
